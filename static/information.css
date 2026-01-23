@@ -1,0 +1,124 @@
+/* informacion.css */
+
+/* Título de la página */
+.info-header {
+    text-align: center;
+    color: white;
+    padding: 30px 20px 10px;
+}
+.info-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+/* CONTENEDOR DE LA GRILLA */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* LAS TARJETAS */
+.info-card {
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+    border-bottom: 5px solid #4C64B9;
+    height: 100%; /* Para que todas midan lo mismo de alto */
+}
+
+.info-card:hover {
+    transform: translateY(-10px);
+}
+
+/* ICONOS */
+.icono {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+/* TEXTOS */
+.info-card h2 {
+    color: #4C64B9;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.info-card p {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.nota-extra {
+    font-size: 0.9rem;
+    color: #888;
+    font-style: italic;
+}
+
+/* CONTACTO */
+.datos-contacto p {
+    background-color: #f0f4ff;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.btn-contacto {
+    display: inline-block;
+    background-color: #4C64B9;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* HORARIOS */
+.lista-horarios {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-horarios li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.lista-horarios li:last-child {
+    border-bottom: none;
+}
+
+/* --- ESTILOS DEL MAPA (Agregar al final de information.css) --- */
+.mapa-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.titulo-mapa {
+    color: var(--color-primary); /* Variable global */
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.mapa-box {
+    border-radius: 20px;
+    overflow: hidden; /* Para que el mapa respete los bordes redondeados */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border: 5px solid white;
+}

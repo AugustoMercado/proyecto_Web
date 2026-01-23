@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'allproducts.css' %}">
+
+    <div style="text-align: center; margin: 20px 0; color: white;">
+        {% if query %}
+            <h1 style="color: var(--color-accent);">Resultados para: "{{ query }}"</h1>
+        {% elif category %}
+            <h1>Sección: {{ category.name }}</h1>
+        {% else %}
+            <h1>Nuestros Productos</h1>
+        {% endif %}
+    </div>
+
+    <div class="grilla-final">
+
+    {% for product in products %}
+
+        <div class="producto">
+            
+            {% if product.stock <= 0 %}
+                <span class="badge-agotado">AGOTADO</span>
+            {% endif %}
+
+            {% if product.image %}
+                <a href="{% url 'product_details' product.id %}">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="{% if product.stock <= 0 %}sin-stock-img{% endif %}">
+                </a>
+            {% else %}
+                <div class="sin-foto">Sin Imagen</div>
+            {% endif %}
+
+            <h3>{{ product.name }}</h3>
+            
+            {% if product.is_kilo %}
+                <p class="precio">${{ product.price }} x 100g</p>
+            {% else %}
+                <p class="precio">${{ product.price }}</p>
+            {% endif %}
+
+            <p class="descripcion">{{ product.details|truncatechars:50 }}</p>
+
+        </div>
+
+    {% empty %}
+        <p style="color: white; text-align: center; grid-column: 1/-1;">No se encontraron productos.</p>
+    {% endfor %}
+
+    </div>
+{% endblock %}

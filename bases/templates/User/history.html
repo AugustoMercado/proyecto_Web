@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'historial.css' %}">
+
+<div class="history-wrapper">
+    
+    <h1 class="history-title">📜 Mis Pedidos</h1>
+
+    <div class="history-list">
+        {% for order in orders %}
+        
+        <div class="order-card">
+            
+            <div class="order-header">
+                <div class="order-info">
+                    <span class="order-id">Pedido #{{ order.id }}</span>
+                    <span class="order-date">📅 {{ order.day_buy|date:"d/m/Y" }}</span> 
+                </div>
+                
+                <div class="order-actions">
+                    <span class="order-total">Total: ${{ order.get_total|floatformat:0 }}</span>
+                    <a href="{% url 'view_ticket' order.id %}" class="btn-ver-ticket">📄 Ver Ticket</a>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <div class="order-items">
+                {% for item in order.cartbuy.all %}
+                <div class="mini-item">
+                    <div class="mini-img">
+                        {% if item.product.image %}
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                        {% else %}
+                            <div class="no-img">📦</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mini-details">
+                        <span class="mini-name">{{ item.product.name }}</span>
+                        <span class="mini-qty">{{ item.quantity }} x ${{ item.product.price }}</span>
+                    </div>
+
+                    <a href="{% url 'product_details' item.product.id %}" class="btn-mini-buy">🛒</a>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+        {% empty %}
+            <div class="empty-history">
+                <p>Aún no has realizado compras.</p>
+                <a href="{% url 'main' %}" class="btn-go-shop">Ir a comprar</a>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

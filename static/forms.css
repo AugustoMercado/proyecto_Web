@@ -1,0 +1,64 @@
+/* login.css - Formulario de Acceso */
+
+.container {
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.createbackground {
+    background-color: var(--color-primary); /* Variable */
+    padding: 40px;             
+    border-radius: 20px;     
+    width: 100%;
+    max-width: 400px;     
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.campo-formulario { margin-bottom: 20px; }
+
+label {
+    display: block;           
+    color: var(--text-light);
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;             
+    padding: 12px;            
+    border: none;
+    border-radius: 8px;
+    background-color: #f0f4ff; 
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: var(--text-main);
+}
+
+input:focus {
+    outline: 2px solid var(--color-accent); /* Variable */
+    background-color: white;
+}
+
+.mi-boton {
+    background-color: var(--color-accent); /* Variable */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;             
+    margin-top: 20px;
+    font-size: 1.1rem;
+    transition: background 0.2s;
+}
+
+.mi-boton:hover {
+    background-color: var(--color-accent-dark);
+}
+
+.create { text-align: center; color: white; margin-top: 15px; }
+.create a { color: var(--color-highlight); text-decoration: none; font-weight: bold; }

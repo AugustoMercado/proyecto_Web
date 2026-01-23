@@ -1,0 +1,95 @@
+/* promotions.css */
+
+.contenedor-catalogo-promos {
+    display: flex;
+    flex-wrap: wrap;       
+    justify-content: center; 
+    gap: 40px;             
+    padding: 40px 20px;
+    max-width: 1200px;     
+    margin: 0 auto;
+    /* Fondo transparente para que se vea el gris #f4f4f4 del body */
+}
+
+.titulo-pagina-promos {
+    text-align: center;
+    color: #4C64B9; /* AZUL - Título estructural sobre fondo gris */
+    margin: 40px 0;
+    font-size: 3rem;
+    text-transform: uppercase;
+    text-shadow: none; /* Limpio, sin sombras raras */
+}
+
+.tarjeta-promo {
+    width: 300px; 
+    background-color: #4C64B9; /* AZUL - Fondo de tarjeta */
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    border: none; /* Quitamos bordes viejos */
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: var(--text-secondary);
+}
+
+.tarjeta-promo:hover {
+    transform: translateY(-5px); 
+    background-color: #3b4e91; /* Azul un poco más oscuro al pasar el mouse */
+    box-shadow: 0 15px 30px rgba(76,100,185,0.4);
+    cursor: pointer;
+}
+
+.promo-img-box {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 15px;
+    background: white; /* Blanco para que la foto respire */
+    border-radius: 15px;
+    overflow: hidden;
+    border: none;
+    padding: 5px; /* Un pequeño borde blanco interno */
+    box-sizing: border-box;
+}
+
+.promo-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    border-radius: 10px;
+}
+
+.promo-contenido {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-family: sans-serif;
+    line-height: 1.4;
+}
+
+/* Si tienes títulos dentro del contenido, ponlos en Dorado para contraste */
+.promo-contenido h3 {
+    color: #f1c40f; 
+    margin-bottom: 5px;
+}
+
+.promo-precio {
+    /* ESTILO "PASTILLA" PARA PRECIO */
+    background-color: var(--bg-card);
+    color: #E67E22; /* NARANJA - Acción/Precio */
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-align: center;
+    align-self: flex-end; /* Lo empuja a la derecha/abajo */
+    margin-top: auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.link-sin-estilo { 
+    text-decoration: none; 
+    color: inherit;
+    display: block;
+}

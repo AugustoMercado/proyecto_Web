@@ -1,0 +1,316 @@
+/* =========================================
+   1. VARIABLES GLOBALES (MODO OSCURO PERMANENTE)
+   ========================================= */
+:root {
+    /* --- PALETA DE COLORES --- */
+    --color-primary: #4C64B9;       /* Azul (Se mantiene igual) */
+    --color-primary-dark: #3b4e91;  
+    
+    --color-accent: #E67E22;        /* Naranja (Resalta genial sobre negro) */
+    --color-accent-dark: #d35400;   
+    
+    --color-highlight: #f1c40f;     
+    --color-success: #2ecc71;       
+    --color-danger: #e74c3c;        
+    --color-whatsapp: #25D366;      
+
+    /* --- ACÁ ESTÁ LA MAGIA OSCURA --- */
+    --bg-body: #121212;             /* Fondo CASI negro (Muy elegante) */
+    --bg-card: #1e1e1e;             /* Tarjetas gris muy oscuro (para que se noten) */
+    --text-main: #e0e0e0;           /* Texto Blanco suave (no quema los ojos) */
+    --text-secondary: #b0b0b0;      /* Texto gris claro */
+    --text-muted: #666666;          
+    --text-light: #ffffff;          
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;        
+    display: flex;          
+    flex-direction: column;   
+    
+    background-color: var(--bg-body);
+    color: var(--text-main) ;
+
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+.container {
+    flex: 1; 
+    width: 100%;
+    padding: 20px; 
+}
+
+.title { 
+    text-align: center; 
+    color: var(--color-primary); 
+    margin-bottom: 20px; 
+}
+
+.sub-title { 
+    text-align: left; 
+    color: var(--text-secondary); 
+}
+
+/* =========================================
+   2. NAVBAR & NAVEGACIÓN
+   ========================================= */
+.nav-down, .nav-up {
+    background-color: var(--color-primary); 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    padding: 15px 0; 
+    width: 100%;
+}
+
+.nav-down ul, .nav-up ul {
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-down ul li a, .nav-up ul li a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1.1rem; 
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.nav-down ul li a:hover, .nav-up ul li a:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: var(--color-accent);
+    transform: translateY(-2px);
+}
+
+summary {
+    list-style: none; 
+    cursor: pointer;
+}
+
+.mi-menu {
+    position: relative; 
+}
+
+/* =========================================
+   3. MENÚ DESPLEGABLE (PERFIL)
+   ========================================= */
+.menu-desplegable {
+    background-color: var(--bg-card);
+    border-radius: 15px;        
+    padding: 10px;              
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+    min-width: 180px;           
+    display: flex;
+    flex-direction: column;     
+    gap: 5px;                  
+    position: absolute;
+    right: 0;                  
+    top: 40px;                  
+    z-index: 1000;
+    border: 2px solid var(--color-primary);
+}
+
+.menu-desplegable::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 20px;
+    width: 15px;
+    height: 15px;
+    background-color: var(--bg-card);
+    border-left: 2px solid var(--color-primary);
+    border-top: 2px solid var(--color-primary);
+    transform: rotate(45deg);
+}
+
+.menu-desplegable a {
+    color: var(--color-primary);
+    text-decoration: none;      
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;         
+    padding: 10px;          
+    border-radius: 10px;        
+    transition: background 0.2s;
+}
+
+.menu-desplegable a:hover {
+    background-color: var(--color-accent);
+    color: var(--text-light);
+}
+
+/* =========================================
+   4. BUSCADOR 
+   ========================================= */
+.search-form {
+    background-color: var(--bg-card);
+    border-radius: 30px;
+    padding: 5px 5px 5px 15px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.search-form:focus-within {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border-color: rgba(230, 126, 34, 0.3); 
+}
+
+.search-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    width: 100px;
+    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.search-input:focus {
+    width: 220px;
+}
+
+.search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background-color 0.2s, color 0.2s;
+    color: var(--color-primary);
+    margin-left: 5px;
+}
+
+.search-button:hover {
+    background-color: var(--bg-body);
+    color: var(--color-accent);
+    transform: scale(1.1);
+}
+
+/* =========================================
+   5. FOOTER PRINCIPAL
+   ========================================= */
+.main-footer {
+    background-color: var(--color-primary);
+    color: var(--text-light);
+    margin-top: auto;
+    padding-top: 50px;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 40px 20px;
+    gap: 30px;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-col h3 {
+    color: var(--color-accent);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.footer-col p {
+    color: #e0e0e0;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: color 0.3s, padding-left 0.3s;
+}
+
+.footer-col ul li a:hover {
+    color: var(--color-accent);
+    padding-left: 5px;
+}
+
+.footer-bottom {
+    background-color: var(--color-primary-dark);
+    text-align: center;
+    padding: 20px;
+    font-size: 0.85rem;
+    color: #bbb;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* --- BOTÓN WHATSAPP FLOTANTE --- */
+.btn-whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--color-whatsapp);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: pulse-green 2s infinite;
+}
+
+.btn-whatsapp:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(37, 211, 102, 0.6);
+}
+
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* Ajuste global para el Toast Notification (para que no tape whatsapp) */
+#toast-box {
+    bottom: 90px; 
+    right: 20px;
+}

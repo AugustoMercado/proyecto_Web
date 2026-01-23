@@ -1,0 +1,134 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="cart-wrapper">
+<link rel="stylesheet" href="{% static 'cart_article.css' %}">
+    {% if not user.is_authenticated %}
+        
+        <div class="empty-cart-box">
+            <span class="empty-icon">🔒👤</span>
+            <h2 style="color: #4C64B9; margin-bottom: 10px;">Inicia Sesión</h2>
+            <p style="color: #888; margin-bottom: 25px;">
+                Necesitas una cuenta para armar tu carrito y guardar tus productos.
+            </p>
+            
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="{% url 'login' %}" class="btn-ir-comprar">
+                    Ingresar
+                </a>
+                <a href="{% url 'create' %}" class="btn-ir-comprar" style="background-color: #4C64B9;">
+                    Crear Cuenta
+                </a>
+            </div>
+        </div>
+
+    {% else %}
+
+        {% for c in cart %}
+            {% if c.active %}
+                
+                <h1 class="title">Carrito de {{ c.user.first_name }}</h1>
+
+                {% if c.cartbuy.all %}
+
+                    {% for item in c.cartbuy.all %}
+                    <div class="cart-pill" id="producto-{{ item.product.id }}">
+
+                        <a href="javascript:void(0)" class="btn-close"
+                           onclick="ask_delete('{% url 'remove_from_cart' item.product.id %}')">
+                           ✕ 
+                        </a>
+                            
+                        <div class="pill-img">
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                        </div>
+                        
+                        <div class="pill-info">
+                            <h3>{{ item.product.name }}</h3>
+                            <p>${{ item.product.price }}</p>
+                            <p style="font-size: 0.8rem; opacity: 0.8;">{{ item.product.details }}</p>
+                        </div>
+
+                        <div class="pill-actions">
+                            <span class="label-cantidad" style="font-size: 0.7rem; margin-bottom: 5px;">CANTIDAD</span>
+                            
+                            <div class="qty-capsule">
+                                
+                                {% if item.product.is_kilo %}
+                                    <span class="qty-number" style="width: 100%; text-align: center;">
+                                        {{ item.quantity }} g
+                                    </span>
+                                
+                                {% else %}
+
+                                    <button class="btn-qty" onclick="updateQty('{{ item.product.id }}', 'subtract','{% url 'remove_from_cart' item.product.id %}')">−</button>
+                                    
+                                    <span id="qty-{{ item.product.id }}" class="qty-number">
+                                        {{ item.quantity }}
+                                    </span>
+                                    
+                                    <button class="btn-qty" onclick="updateQty('{{ item.product.id }}', 'add','{% url 'remove_from_cart' item.product.id %}')">+</button>
+                                {% endif %}
+
+                            </div>
+                        </div>
+
+                    </div>
+                    {% endfor %}
+
+                    <div class="total-pill">
+                        <h2 style="margin:0;">TOTAL: $<span id="total-carrito">{{ c.get_total|floatformat:0 }}</span></h2>
+
+                        <div>
+                            <a href="javascript:void(0)" 
+                               onclick="ask_cancel_cart('{% url 'cancel_cart' %}')" 
+                               style="margin-right:15px; text-decoration:none; cursor: pointer; color: inherit; font-weight: bold;">
+                               Cancelar
+                            </a>
+                            
+                            <button class="btn-pay" onclick="pagarTotal('{% url 'process_buy' %}')">
+                                Encargar
+                            </button>
+                        </div>
+                    </div>
+
+                {% else %}
+                    
+                    <div class="empty-cart-box">
+                        <span class="empty-icon">🛒💔</span>
+                        <h2 style="color: #555;">Tu carrito está vacío</h2>
+                        <p style="color:#888;">¡Mirá nuestras ofertas!</p>
+                        <a href="{% url 'main' %}" class="btn-ir-comprar">Ir a la Tienda</a>
+                    </div>
+
+                {% endif %} 
+            {% endif %}
+        {% endfor %}
+
+    {% endif %} 
+</div>
+
+<div id="modalBorrar" class="modal-overlay" style="display: none;">
+    <div class="modal-box">
+        <h3>¿Estás seguro?</h3>
+        <p>Vas a eliminar este producto.</p>
+        <div class="modal-buttons">
+            <button onclick="Closemodal()" class="btn-cancelar">Cancelar</button>
+            <a id="btnConfirmar" href="#" class="btn-confirmar">Sí, eliminar</a>
+        </div>
+    </div>
+</div>
+
+<div id="modalExito" class="modal-overlay" style="display: none;">
+    <div class="modal-box" style="border-color: #2ecc71;"> 
+        <h3 style="color: #2ecc71;">¡Muchas Gracias!</h3>
+        <p>Se estará preparando tu encargo.</p>
+        <p>📦 🚚 🏠</p> 
+    </div>
+</div>
+
+<script src="{% static 'JavaScript/main.js' %}"></script>
+
+{% endblock %}

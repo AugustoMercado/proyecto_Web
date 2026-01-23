@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="{% static 'information.css' %}">
+    <div class="info-header">
+        <h1>Información Útil</h1>
+        <p>Todo lo que necesitas saber para comprar tranquilo</p>
+    </div>
+
+    <div class="info-grid">
+
+        <div class="info-card">
+            <div class="icono">🚚</div>
+            <h2>Retiros</h2>
+            <p>
+                Armas el pedido en la web y nosotros lo preparamos. 
+                Solo pasas a pagarlo y retirarlo <strong>sin demoras</strong>.
+            </p>
+            <p class="nota-extra">Nos aseguramos que tu compra esté lista para evitar inconvenientes.</p>
+        </div>
+
+        <div class="info-card">
+            <div class="icono">📞</div>
+            <h2>Contactanos</h2>
+            <p>¿Tenés dudas? Escribinos o llamanos.</p>
+            
+            <div class="datos-contacto">
+                <p><strong>Teléfono:</strong> <br> 11 2343-5678</p>
+                <p><strong>Email:</strong> <br> almacenbella@gmail.com</p>
+            </div>
+            
+            <a href="mailto:almacenbella@gmail.com" class="btn-contacto">Enviar Correo</a>
+        </div>
+
+        <div class="info-card">
+            <div class="icono">⏰</div>
+            <h2>Nuestros Horarios</h2>
+            <p>Estamos abiertos para vos en estos turnos:</p>
+            
+            <ul class="lista-horarios">
+                <li>
+                    <span>Mañana:</span> 
+                    <strong>9:30 am - 15:00 pm</strong>
+                </li>
+                <li>
+                    <span>Tarde:</span> 
+                    <strong>18:00 pm - 23:00 pm</strong>
+                </li>
+            </ul>
+        </div>
+    </div> 
+    
+    <div class="mapa-container">
+        <h2 class="titulo-mapa">📍 Encuéntranos Aquí</h2>
+        <div class="mapa-box">
+            <iframe src="https://www.google.com/maps/embed?pb=!4v1769026418382!6m8!1m7!1sKddeiOq67d8UDfqGFoQ62g!2m2!1d-34.72245930964089!2d-58.46113445206556!3f255.46274812195944!4f-3.202803329708644!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+
+{% endblock %}

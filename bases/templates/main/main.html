@@ -1,0 +1,92 @@
+{% extends 'index.html'%}
+{% load static %}
+{% block content%}
+<link rel="stylesheet" href="{% static 'main.css' %}">
+
+<h1 class="title">Bienvenido al Almacen Bella</h1>
+
+<div class="carrusel-contenedor">
+
+    <div class="carrusel-track">
+
+        {% for product in products %}
+        <div class="producto-item">
+            <a href="{% url 'products_by_category' product.category.id %}">
+                <img src="{{ product.image.url }}" class="carrusel-img">
+            </a>
+        </div>
+        {% endfor %}
+
+        {% for product in products %}
+        <div class="producto-item">
+            <a href="{% url 'products_by_category' product.category.id %}">
+                <img src="{{ product.image.url }}" class="carrusel-img">
+            </a>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+
+<section class="seccion-promos-especiales">
+
+    <h2 class="titulo-promos">PROMOS DE LA SEMANA</h2>
+   <div class="grid-promos">
+    {% for promo in promos %}
+        {% if promo.is_promotion %} 
+        
+        <a href="{% url 'promo_details' promo.id %}" class="link-sin-estilo" style="text-decoration: none">
+            
+            <div class="tarjeta-promo">
+                
+                <div class="promo-img-box">
+                    {% if promo.image %}
+                    <img src="{{ promo.image.url }}" alt="{{ promo.name }}">
+                    {% endif %}
+                </div>
+                
+                <div class="promo-contenido">
+                    <h3 style="margin: 0; color: #E67E22;">{{ promo.name }}</h3>
+                    
+                    <p>{{ promo.details|linebreaksbr }}</p>
+                </div>
+                
+                <div class="promo-precio">
+                    $ {{ promo.price }}
+                </div>
+                
+            </div>
+        </a>
+        {% endif %}
+    {% endfor %}
+</div>
+
+</section>
+
+
+<section class="historia-section">
+    <div class="historia-card">
+
+        <h2>Nuestra Historia</h2>
+
+        <div class="historia-contenido">
+
+            <p>
+                Este almacén tiene una historia familiar que se remonta a una inversión realizada por mi abuelo...
+                <br><br>
+                Siempre funcionó como almacén, sumando verdulería y kiosco según las necesidades del barrio.
+                Con los años, la gestión fue pasando por distintos miembros de la familia, manteniendo siempre
+                el mismo espíritu de trabajo.
+                <br><br>
+                <strong>Actualmente, el almacén está a cargo de mi madre y mío.</strong>
+                Nos ocupamos de su funcionamiento continuando con una tradición de atención simple, directa y de
+                confianza.
+            </p>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

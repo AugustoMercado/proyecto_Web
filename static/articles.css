@@ -1,0 +1,72 @@
+/* articles.css */
+
+/* 1. CONTENEDOR DE LA GRILLA */
+.contenedor-categorias {
+    display: grid;
+    /* Usamos auto-fit para que se adapte a cualquier pantalla automáticamente */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 30px;
+    padding: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    /* Fondo transparente para que se vea el gris del body */
+}
+
+/* 2. LA TARJETA (Categoría) */
+.tarjeta-categoria {
+    background-color: #4C64B9; /* AZUL - Estructura */
+    border-radius: 20px;       /* Bordes más suaves */
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    /* Sombra suave inicial */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    min-height: 200px; /* Altura consistente */
+}
+
+/* EFECTO HOVER (El que te faltaba) */
+.tarjeta-categoria:hover {
+    transform: translateY(-5px); /* Se eleva */
+    background-color: #3b4e91;   /* Azul un poco más oscuro */
+    box-shadow: 0 15px 30px rgba(76,100,185,0.4); /* Resplandor azulado */
+    cursor: pointer;
+}
+
+.img-referencia {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    
+    background-color: var(--bg-card);
+    border-radius: 50%;
+    padding: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+
+.texto-categoria {
+    color: white;
+    font-family: sans-serif;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+
+
+@media (max-width: 600px) {
+    .contenedor-categorias {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+}

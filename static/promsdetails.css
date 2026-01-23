@@ -1,0 +1,145 @@
+/* promsdetails.css */
+
+.contenedor-detalle-promo {
+    max-width: 800px;
+    margin: 40px auto;
+    
+    /* CAMBIO: Fondo Azul (Estructura) */
+    background-color: #4C64B9; 
+    color: white; /* Texto blanco */
+    
+    border-radius: 25px;
+    padding: 40px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    /* Quitamos el borde naranja superior viejo, ahora es todo azul */
+    border-top: none; 
+}
+
+.titulo-promo-detalle {
+    color: white; /* Blanco para contrastar con el fondo azul */
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.img-promo-gigante {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    
+    /* Agregamos un marco blanco para separar la foto del fondo azul */
+    background-color: var(--bg-card);
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.descripcion-lista {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    
+    /* CAMBIO: Bloque Blanco interno para lectura cómoda */
+    background-color: var(--bg-card);
+    color: #ffffff; /* Texto oscuro */
+    
+    padding: 25px;
+    border-radius: 15px;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 30px;
+    
+    /* Borde Naranja sutil a la izquierda para decorar */
+    border-left: 8px solid #E67E22; 
+}
+
+.precio-gigante {
+    /* CAMBIO: Pastilla blanca con texto Naranja (Acción) */
+    background-color: var(--bg-card);
+    color: #E67E22;
+    padding: 10px 30px;
+    border-radius: 50px;
+    
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* El botón de volver */
+.btn-volver {
+    text-decoration: none;
+    color: rgba(255,255,255,0.7); /* Blanco semitransparente */
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: color 0.3s;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.btn-volver:hover { 
+    color: white; 
+    background-color: rgba(255,255,255,0.1);
+    border-color: white;
+}
+
+.btn-agregar-final {
+    background-color: #E67E22;
+    color: white;
+    font-size: 1.3rem;
+    padding: 15px 40px;
+    border-radius: 50px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+    transition: transform 0.2s;
+}
+.btn-agregar-final:hover {
+    transform: scale(1.05);
+    background-color: #d35400;
+}
+
+
+#toast-box {
+    position: fixed;
+    bottom: 30px;        
+    right: 30px;         
+    background-color: #2ecc71; 
+    color: white;
+    padding: 15px 25px;
+    border-radius: 50px; /* Redondito */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    font-weight: bold;
+    font-size: 1.1rem;
+    z-index: 9999;       
+    
+    
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    
+    
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.toast-hidden {
+    opacity: 0;
+    transform: translateY(100px); 
+    pointer-events: none; 
+}
+
+
+.toast-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
