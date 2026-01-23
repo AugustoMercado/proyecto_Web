@@ -1,9 +1,8 @@
-/* informacion.css */
+/* information.css - MODO DARK */
 
-/* Título de la página */
 .info-header {
     text-align: center;
-    color: white;
+    color: var(--color-accent); /* Título Naranja */
     padding: 30px 20px 10px;
 }
 .info-header h1 {
@@ -12,7 +11,6 @@
     text-transform: uppercase;
 }
 
-/* CONTENEDOR DE LA GRILLA */
 .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -22,66 +20,73 @@
     margin: 0 auto;
 }
 
-/* LAS TARJETAS */
+/* TARJETAS OSCURAS */
 .info-card {
-    background-color: white;
+    background-color: var(--bg-card); /* Gris Oscuro */
     border-radius: 20px;
     padding: 30px;
     text-align: center;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3); /* Sombra más oscura */
     transition: transform 0.3s ease;
-    border-bottom: 5px solid #4C64B9;
-    height: 100%; /* Para que todas midan lo mismo de alto */
+    border-bottom: 5px solid var(--color-primary-dark); /* Borde Naranja abajo */
+    height: 100%;
 }
 
 .info-card:hover {
     transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(34, 86, 230, 0.2); 
 }
 
-/* ICONOS */
 .icono {
     font-size: 4rem;
     margin-bottom: 20px;
     display: block;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); /* Brillo sutil */
 }
 
-/* TEXTOS */
 .info-card h2 {
-    color: #4C64B9;
+    color: var(--text-light); /* Blanco */
     font-size: 1.5rem;
     margin-bottom: 15px;
     text-transform: uppercase;
 }
 
 .info-card p {
-    color: #555;
+    color: var(--text-secondary); /* Gris claro */
     line-height: 1.6;
     margin-bottom: 15px;
 }
 
 .nota-extra {
     font-size: 0.9rem;
-    color: #888;
+    color: var(--text-muted);
     font-style: italic;
 }
 
 /* CONTACTO */
 .datos-contacto p {
-    background-color: #f0f4ff;
+    background-color: #2a2a2a; /* Fondo un pelín más claro que la tarjeta */
+    color: var(--text-main);
     padding: 10px;
     border-radius: 10px;
     margin: 10px 0;
+    border: 1px solid #333;
 }
 
 .btn-contacto {
     display: inline-block;
-    background-color: #4C64B9;
+    background-color: var(--color-accent); /* Botón Naranja */
     color: white;
     padding: 10px 20px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: bold;
     margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.btn-contacto:hover {
+    background-color: var(--color-accent-dark);
 }
 
 /* HORARIOS */
@@ -94,14 +99,15 @@
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #333; /* Líneas separadoras oscuras */
+    color: var(--text-secondary);
 }
 
 .lista-horarios li:last-child {
     border-bottom: none;
 }
 
-/* --- ESTILOS DEL MAPA (Agregar al final de information.css) --- */
+/* MAPA */
 .mapa-container {
     max-width: 1200px;
     margin: 40px auto;
@@ -110,7 +116,7 @@
 }
 
 .titulo-mapa {
-    color: var(--color-primary); /* Variable global */
+    color: var(--color-accent); /* Título Naranja */
     font-size: 2rem;
     margin-bottom: 20px;
     text-transform: uppercase;
@@ -118,7 +124,7 @@
 
 .mapa-box {
     border-radius: 20px;
-    overflow: hidden; /* Para que el mapa respete los bordes redondeados */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    border: 5px solid white;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 2px solid #333; /* Borde sutil */
 }

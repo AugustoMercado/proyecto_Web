@@ -1,49 +1,41 @@
-/* main.css */
+/* main.css - CORREGIDO (Dark Mode + Tamaños fijos) */
 
-/* CARRUSEL */
+/* --- 1. CARRUSEL --- */
 .carrusel-contenedor {
     width: 100%;
     overflow: hidden; 
     padding: 20px 0; 
- 
-    /* Fondo transparente, toma el gris del body */
 }
 
 .carrusel-track {
     display: flex;
     gap: 30px;
     width: max-content; 
-    
     animation: scroll 20s linear infinite;
 }
 
 .producto-item {
     flex: 0 0 auto;
-    width: 200px;  
-    height: 250px;  
-    background-color: var(--bg-card);
+    width: 240px;   /* Tamaño ideal para que se vea bien */
+    height: 300px;  
+    background-color: var(--bg-card); /* Fondo oscuro */
     border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    border: 2px solid transparent;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    border: 1px solid #333;
     transition: all 0.3s ease; 
 }
 
 .producto-item:hover {
     transform: translateY(-5px); 
-    box-shadow: 0 10px 20px rgba(76,100,185,0.2); /* Sombra azulada */
-    border-color: #4C64B9; /* Borde azul al pasar el mouse */
+    box-shadow: 0 0 15px rgba(76, 100, 185, 0.4); /* Glow AZUL (Estructura) */
+    border-color: var(--color-primary); 
     cursor: pointer;
     z-index: 10;
 }
-
-.producto-item a {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
+.producto-item a { display: block; width: 100%; height: 100%; }
 
 .carrusel-img {
     width: 100%;
@@ -57,7 +49,7 @@
     100% { transform: translateX(-50%); }
 }
 
-/* HISTORIA */
+/* --- 2. HISTORIA --- */
 .historia-section {
     padding: 60px 20px;
     width: 100%;
@@ -66,22 +58,22 @@
 }
 
 .historia-card {
-   background-color: var(--bg-card); /* Lectura sobre blanco */
+    background-color: var(--bg-card); 
     max-width: 900px;     
     padding: 40px;
     border-radius: 20px;    
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
-    border-top: 5px solid #4C64B9; /* Detalle Azul Estructural */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4); 
+    border-top: 5px solid var(--color-primary); /* Borde superior AZUL */
 }
 
 .historia-card h2 {
-    color: #4C64B9; /* Azul */     
+    color: var(--color-primary); /* Título AZUL */      
     font-size: 2.5rem;
     margin-bottom: 30px;
     font-family: sans-serif;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border-bottom: 2px solid #eee; 
+    border-bottom: 2px solid #333; 
     padding-bottom: 10px;
     display: inline-block;
 }
@@ -93,7 +85,7 @@
 }
 
 .historia-card p {
-    color: var(--text-secondary);             
+    color: var(--text-main);              
     font-family: sans-serif;
     font-size: 1.1rem;
     line-height: 1.8;       
@@ -101,26 +93,20 @@
     text-align: justify;     
 }
 
-.historia-card strong {
-    color: #E67E22; /* Naranja para resaltar */         
-}
+.historia-card strong { color: var(--color-highlight); }
 
 .historia-foto { flex: 1; }
 
 .historia-foto img {
     width: 100%;
+    max-width: 300px; /* Control de tamaño imagen */
+    height: auto;
     border-radius: 15px;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
-    transform: rotate(2deg); 
-    border: 5px solid #f4f4f4;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    border: 3px solid var(--bg-body);
 }
 
-@media (max-width: 768px) {
-    .historia-contenido { flex-direction: column-reverse; }
-    .historia-foto img { transform: rotate(0deg); max-width: 80%; margin-bottom: 20px; }
-}
-
-/* PROMOS */
+/* --- 3. PROMOS (La parte que faltaba) --- */
 .seccion-promos-especiales {
     padding: 40px 20px;
     margin-bottom: 40px; 
@@ -128,11 +114,10 @@
 
 .titulo-promos {
     text-align: center;
-    color: #4C64B9; /* Azul (Estructura) */
+    color: var(--color-primary); /* Azul estructura */
     font-size: 2.5rem;
     margin-bottom: 40px;
     text-transform: uppercase;
-    text-shadow: none; /* Limpio */
 }
 
 .grid-promos {
@@ -143,22 +128,22 @@
 }
 
 .tarjeta-promo {
-    width: 300px;
-    background-color: #4C64B9; /* AZUL - Tarjeta */
+    width: 300px;  
+    background-color: var(--bg-card); 
     border-radius: 20px;
     padding: 20px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     display: flex;
     flex-direction: column;
     transition: transform 0.3s ease;
-    border: none;
+    border: 2px solid var(--color-primary); 
     color: var(--text-secondary);
 }
 
 .tarjeta-promo:hover {
     transform: translateY(-5px); 
-    box-shadow: 0 15px 30px rgba(76,100,185,0.4);
-    background-color: #3b4e91; /* Un poco más oscuro */
+    box-shadow: 0 0 20px rgba(76, 100, 185, 0.4); 
+    background-color: #252525;
     cursor: pointer;
 }
 
@@ -166,10 +151,9 @@
     width: 100%;
     height: 200px;
     margin-bottom: 15px;
-    background: rgb(0, 0, 0); /* Blanco para que la foto no se mezcle con el azul */
+    background: transparent;
     border-radius: 15px;
     overflow: hidden;
-    border: none; 
 }
 
 .promo-img-box img {
@@ -183,19 +167,15 @@
     line-height: 1.6;
     text-align: left;
     margin-bottom: 20px;
-    font-family: sans-serif;
-    color: white; /* Texto blanco */
-    text-decoration: none;
-    text-shadow: none;
+    color: var(--text-main);
 }
 
-.promo-contenido h3 {
-    color: #f1c40f !important; /* Amarillo/Dorado para el título dentro de lo azul */
-}
+.promo-contenido h3 { color: var(--color-highlight); margin-bottom: 5px; }
 
 .promo-precio {
-    color: #E67E22; /* NARANJA - Acción/Precio */
-    background-color: var(--bg-card);
+    /* ÚNICO ELEMENTO NARANJA (Venta/Acción) */
+    color: var(--color-accent); 
+    background-color: #333;
     padding: 5px 15px;
     border-radius: 50px;
     font-size: 1.8rem;
@@ -203,4 +183,19 @@
     margin-top: auto; 
     text-align: center; 
     align-self: flex-end;
+}
+
+/* --- 4. RESPONSIVE (Celulares) --- */
+@media (max-width: 768px) {
+    /* Historia */
+    .historia-contenido { flex-direction: column-reverse; }
+    .historia-foto img { transform: rotate(0deg); max-width: 100%; margin-bottom: 20px; }
+    
+    /* Promos */
+    .grid-promos { gap: 20px; }
+    .tarjeta-promo { 
+        width: 100%; /* En celu ocupa el ancho */
+        max-width: 350px; /* Tope máximo */
+        margin: 0 auto; 
+    }
 }

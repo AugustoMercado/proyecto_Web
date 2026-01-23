@@ -148,20 +148,34 @@
     box-shadow: none !important;
 }
 
-/* TOAST (Estilo visual, la posición está en styles.css) */
-#toast-box {
-    position: fixed;
-    background-color: var(--color-success); 
-    color: white;
-    padding: 15px 25px;
-    border-radius: 50px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    font-weight: bold;
-    font-size: 1.1rem;
-    z-index: 9999;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    display: flex; align-items: center; gap: 10px;
-}
 
-.toast-hidden { opacity: 0; transform: translateY(100px); pointer-events: none; }
-.toast-visible { opacity: 1; transform: translateY(0); }
+
+
+@media (max-width: 768px) {
+    /* 1. Ajustar el contenedor de Historia */
+    .historia-section {
+        padding: 20px 10px; /* Menos relleno a los costados */
+    }
+    .historia-card {
+        padding: 20px; /* Achicamos el relleno interno */
+    }
+    .historia-card h2 {
+        font-size: 1.8rem; /* Título más chico */
+    }
+    .historia-card p {
+        font-size: 1rem; /* Texto de lectura más cómodo */
+    }
+
+    /* 2. Arreglar las Tarjetas de Promos (Estaban fijas en 300px) */
+    .grid-promos {
+        gap: 20px; /* Menos espacio entre tarjetas */
+    }
+    .tarjeta-promo {
+        width: 100%;       /* Que ocupe todo el ancho disponible */
+        max-width: 350px;  /* Pero que no se pase de rosca */
+        margin: 0 auto;    /* Centrada */
+    }
+    .promo-img-box {
+        height: 180px; /* Imagen un poco más baja para que entre todo */
+    }
+}

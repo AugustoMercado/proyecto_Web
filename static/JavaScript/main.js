@@ -1,8 +1,4 @@
-/* --- main.js COMPLETO --- */
 
-/* ==============================================
-   1. UTILIDADES Y TOASTS
-   ============================================== */
 function showToast(mensaje) {
     const toast = document.getElementById('toast-box');
     const texto = document.getElementById('toast-message');
@@ -18,11 +14,7 @@ function showToast(mensaje) {
     }
 }
 
-/* ==============================================
-   2. LÓGICA DE PRODUCTO (VISTA DE DETALLES)
-   ============================================== */
 
-// Botones +/- en la ficha del producto (antes de agregar)
 function changeValue(productId, change) {
     const input = document.getElementById(`quantity-${productId}`);
     if (input) {
@@ -36,48 +28,61 @@ function changeValue(productId, change) {
     }
 }
 
-// Función principal para AGREGAR al carrito
 function processAddToCart(productId, isKiloStr) {
     const input = document.getElementById(`quantity-${productId}`);
     const quantity = input ? parseInt(input.value) : 1;
     
-    // Validar Fiambre (mínimo 50g)
     const isKilo = (isKiloStr === 'True' || isKiloStr === 'true');
     if (isKilo && quantity < 50) {
-        alert("El mínimo para pesar son 50 gramos.");
+        // Usamos el Toast también para validaciones locales
+        showToast("⚠️ El mínimo son 50 gramos."); 
         return;
     }
     
-    // URL correcta
     const url = `/cart/add/${productId}/?cantidad=${quantity}`;
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
             if (data.status === 'ok') {
-                showToast("✅ " + (data.message || "Agregado"));
+                // CASO 1: ÉXITO (Verde)
+                // Cambiamos el fondo a verde (si tenés una clase para eso) o usamos el default
+                const toast = document.getElementById('toast-box');
+                toast.style.backgroundColor = "var(--color-success)"; // Verde
+                showToast("✅ " + data.message);
+                
             } else if (data.status === 'login_required') {
-                window.location.href = "/login/"; 
+                // CASO 2: FALTA LOGIN (Naranja/Rojo)
+                const toast = document.getElementById('toast-box');
+                toast.style.backgroundColor = "var(--color-danger)"; // Rojo/Naranja para alerta
+                showToast("🔒 " + data.message);
+                
+                // Esperamos 2 segundos para que lea el cartel y luego redirigimos
+                setTimeout(() => {
+                    window.location.href = "/login/"; 
+                }, 2000);
+
             } else {
-                alert("Error: " + data.message);
+                // CASO 3: ERROR GENERICO (Rojo)
+                const toast = document.getElementById('toast-box');
+                toast.style.backgroundColor = "var(--color-danger)";
+                showToast("❌ " + (data.message || "Ocurrió un error"));
             }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error:', error);
+            showToast("❌ Error de conexión");
+        });
 }
 
-/* ==============================================
-   3. LÓGICA DEL CARRITO (LO QUE FALTABA) 🛒
-   ============================================== */
 
-// Actualizar cantidad desde el Carrito (+ / -)
 function updateQty(productId, action, urlBorrado) {
     var url = '/cart/update_item/' + productId + '/' + action + '/';
     
-    // Si la acción es restar y queda 1, preguntamos si quiere borrar
-    if (action === 'restar') {
+    // VALIDACIÓN EN INGLÉS ('subtract')
+    if (action === 'subtract') { 
         var qtySpan = document.getElementById('qty-' + productId);
-        // Nota: Si usas span, asegurate de leer innerText. Si es input, value.
-        // Asumiendo que usas span según tu HTML anterior:
+        // Si es 1 y tocan subtract, preguntamos si quiere borrar
         if (qtySpan && parseInt(qtySpan.innerText) <= 1) {
             ask_delete(urlBorrado); 
             return; 
@@ -87,30 +92,36 @@ function updateQty(productId, action, urlBorrado) {
     fetch(url)
     .then(response => response.json())
     .then(data => {
-        // Actualizamos el total general
         var totalSpan = document.getElementById('total-carrito');
         if (totalSpan) totalSpan.innerText = data.total;
         
-        if (data.cantidad === 0) {
-            // Si llega a 0, quitamos la tarjeta
+        // RESPUESTA EN INGLÉS (.quantity)
+        if (data.quantity === 0) {
             var tarjeta = document.getElementById('producto-' + productId);
             if (tarjeta) tarjeta.remove();
         } else {
-            // Si no, actualizamos el numerito
             var qtySpan = document.getElementById('qty-' + productId);
-            if (qtySpan) qtySpan.innerText = data.cantidad;
+            if (qtySpan) qtySpan.innerText = data.quantity; // <--- data.quantity
         }
     })
     .catch(error => console.error('Error:', error));
 }
 
-// Modales de Confirmación
+
 function ask_delete(url) {
     const modal = document.getElementById('modalBorrar');
     if(modal) {
         modal.querySelector('h3').innerText = "¿Estás seguro?";
         modal.querySelector('p').innerText = "Vas a eliminar este producto.";
-        document.getElementById('btnConfirmar').href = url;
+        
+        const btn = document.getElementById('btnConfirmar');
+        btn.innerText = "Sí, eliminar";       // TEXTO DE BORRADO
+        btn.style.backgroundColor = "#e74c3c"; // ROJO (Peligro)
+        
+        // Comportamiento normal de link
+        btn.onclick = null; 
+        btn.href = url;
+        
         modal.style.display = 'flex';
     }
 }
@@ -137,5 +148,29 @@ function pagarTotal(urlDestino) {
         setTimeout(function() {
             window.location.href = urlDestino;
         }, 2000);
+    }
+}
+
+function ask_confirm_order(url) {
+    const modal = document.getElementById('modalBorrar');
+    if(modal) {
+        modal.querySelector('h3').innerText = "¿Confirmar Pedido?";
+        modal.querySelector('p').innerText = "Estás a un paso de finalizar tu compra.";
+        
+        const btn = document.getElementById('btnConfirmar');
+        btn.innerText = "Sí, Comprar";
+        
+        // --- CAMBIO DE COLOR AQUÍ ---
+        btn.style.backgroundColor = "#E67E22"; // TU NARANJA DE MARCA (Mucho mejor)
+        // Si preferís el Azul de la marca usa: "#4C64B9"
+        
+        btn.removeAttribute('href'); 
+        
+        btn.onclick = function() { 
+            Closemodal();     
+            pagarTotal(url);  
+        };
+        
+        modal.style.display = 'flex';
     }
 }

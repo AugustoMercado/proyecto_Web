@@ -1,7 +1,13 @@
+/* allproducts.css - CORRECCIÓN ESPACIOS VACÍOS */
 
 .grilla-final {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    /* Ajustamos a 220px para que entren más productos y se vea más lleno */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    
+    /* PUNTO 3: CENTRAR GRILLA */
+    justify-content: center; 
+    
     gap: 30px;
     width: 100%;
     padding: 40px;
@@ -10,25 +16,27 @@
 }
 
 .producto {
-    background-color: var(--color-primary);
+    background-color: var(--bg-card); 
     padding: 20px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
-    color: var(--text-light);
+    color: var(--text-main);
     position: relative; 
+    border: 1px solid #333;
 }
 
 .producto:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(76, 100, 185, 0.3);
+    box-shadow: 0 0 20px rgba(76, 100, 185, 0.4); /* Glow Azul */
+    border-color: var(--color-primary);
     cursor: pointer;
-    background-color: var(--color-primary-dark); 
+    background-color: #252525;
 }
 
 .producto img {
@@ -37,62 +45,54 @@
     object-fit: contain;
     border-radius: 12px;
     margin-bottom: 15px;
-    background-color: var(--bg-card);
+    background-color: transparent;
     padding: 10px;
-    box-sizing: border-box;
 }
 
 .producto h3 {
     margin: 10px 0 5px 0;
     font-size: 1.2rem;
     font-weight: 600;
+    color: var(--text-light);
 }
 
 .precio {
     font-weight: 800;
-    color: var(--color-accent); /* Variable usada */
-    background: var(--bg-card);
+    color: var(--color-accent); /* PRECIO NARANJA (Correcto) */
+    background: #333;
     padding: 5px 15px;
     border-radius: 15px;
     font-size: 1.2rem;
     margin-bottom: 10px;
     margin-top: auto;
+    border: 1px solid var(--color-accent);
 }
 
 .descripcion {
     font-size: 0.9rem;
-    color: #ddd; /* Color específico de texto claro sobre azul */
+    color: var(--text-secondary);
     line-height: 1.4;
     padding: 0 10px;
     margin-bottom: 15px;
 }
 
-@media (max-width: 768px) {
-    .grilla-final {
-        padding: 20px;
-        gap: 20px;
-    }
-}
-
-/* --- BADGES Y ESTADOS DE STOCK --- */
+/* BADGES */
 .badge-stock, .badge-agotado {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 0.8rem;
-    color: white;
-    z-index: 10;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    position: absolute; top: 15px; right: 15px; padding: 6px 12px;
+    border-radius: 8px; font-weight: bold; font-size: 0.8rem; color: white;
+    z-index: 10; box-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
-
 .badge-stock { background-color: var(--color-success); }
 .badge-agotado { background-color: var(--color-danger); }
+.sin-stock-img { filter: grayscale(100%); opacity: 0.5; }
 
-.sin-stock-img {
-    filter: grayscale(100%);
-    opacity: 0.6;
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .grilla-final {
+        padding: 15px; gap: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+    .producto { padding: 15px; }
+    .producto img { height: 140px; }
+    .precio { font-size: 1.1rem; }
 }
-

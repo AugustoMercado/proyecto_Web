@@ -93,15 +93,22 @@ def send_owner_notification(request, cart):
 def add_to_cart(request, product_id):
     """API Endpoint to add an item to the cart or update its quantity."""
     if not request.user.is_authenticated:
-        return JsonResponse({'status': 'login_required', 'message': 'Authentication required'})
+        return JsonResponse({
+            'status': 'login_required', 
+            'message': 'Debes iniciar sesión para agregar productos'
+        })
 
+    # 2. Si está logueado, sigue la lógica normal...
     product = get_object_or_404(Products, id=product_id)
-    cart, _ = get_or_create_active_cart(request.user)
-    
+    cart, created = Cart.objects.get_or_create(user=request.user, active=True)
+
     cart_item, created = CartsItems.objects.get_or_create(cart_id=cart, product=product)
     
     # Note: Ensure your Frontend sends 'quantity' instead of 'cantidad'
-    user_quantity = int(request.GET.get('quantity', 1))
+    try:
+        user_quantity = int(request.GET.get('cantidad', 1))
+    except ValueError:
+        user_quantity = 1
 
     if created:
         cart_item.quantity = user_quantity
@@ -153,11 +160,11 @@ def update_item(request, product_id, action):
     if not item:
         return JsonResponse({'quantity': 0, 'total': cart.get_total()})
 
-    # Note: Ensure your Frontend sends 'add'/'subtract' instead of 'sumar'/'restar'
+  
     if action == 'add':
         item.quantity += 1
         item.save()
-    elif action == 'subtract':
+    elif action == 'subtract':  
         if item.quantity > 1:
             item.quantity -= 1
             item.save()
@@ -197,7 +204,7 @@ def process_buy(request):
     send_owner_notification(request, cart)
 
     return render(request, 'User/ticket.html', {
-        'qr_code': img_str, 
+        'qr_image': img_str, 
         'cart': cart,
         'date': timezone.now()
     })
@@ -214,4 +221,8 @@ def view_ticket(request, cart_id):
     
     img_str = generate_qr_image(cart.id, cart.user, cart.get_total())
     
-    return
+    return render(request, 'User/ticket.html', {
+        'qr_image': img_str, 
+        'cart': cart,
+        'date': timezone.now()
+    })
