@@ -57,7 +57,7 @@ function processAddToCart(productId, isKiloStr) {
             if (data.status === 'ok') {
                 showToast("✅ " + (data.message || "Agregado"));
             } else if (data.status === 'login_required') {
-                window.location.href = "/LoginAccount/"; 
+                window.location.href = "/login/"; 
             } else {
                 alert("Error: " + data.message);
             }
