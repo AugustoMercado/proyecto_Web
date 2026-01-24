@@ -1,13 +1,18 @@
 from django.contrib import admin
 from django.utils.html import format_html, mark_safe 
 from .models import Products, Category, Promotions
+from adminsortable2.admin import SortableAdminMixin
 
-class ProductsAdmin(admin.ModelAdmin):
+class ProductsAdmin(SortableAdminMixin,admin.ModelAdmin):
     list_display = ('display_image', 'name', 'price', 'stock', 'is_kilo', 'stock_status')
     list_editable = ('price', 'stock', 'is_kilo')
+    list_display_links = ('name',)
     search_fields = ('name', 'details') 
     list_filter = ('category',)
-    
+
+    class Media:
+        js = ('JavaScript/admin_automatizado.js',)
+
     def display_image(self, obj):
         """Displays a thumbnail of the product image in the admin panel."""
         if obj.image:

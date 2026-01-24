@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myusers',
     'myarticles',
-    'cart'
+    'cart',
+    'adminsortable2'
 ]
 
 MIDDLEWARE = [

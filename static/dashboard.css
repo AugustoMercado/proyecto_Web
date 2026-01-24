@@ -81,29 +81,29 @@ body {
 .table-container { 
     background: white; 
     border-radius: 12px; 
-    overflow: hidden; /* Redondea las esquinas del contenedor */
+    overflow: hidden; 
     box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
     margin-bottom: 30px; 
 }
 
-/* --- ESTA ES LA MAGIA PARA CELULARES --- */
+
 .table-responsive {
     width: 100%;
-    overflow-x: auto; /* Permite deslizar si no entra */
-    -webkit-overflow-scrolling: touch; /* Deslizamiento suave en iPhone */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; 
 }
 
 table { 
     width: 100%; 
     border-collapse: collapse; 
-    min-width: 600px; /* Fuerza un ancho mínimo para que no se aplaste */
+    min-width: 600px; 
 }
 
 th, td { 
     padding: 15px; 
     text-align: left; 
     border-bottom: 1px solid #eee; 
-    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+    white-space: nowrap; 
 }
 
 th { 
@@ -160,16 +160,15 @@ th {
 }
 .btn-pay:hover { background: #219150; }
 
-/* --- AJUSTE PARA PANTALLAS CHICAS (CELULAR) --- */
+
 @media (max-width: 600px) {
     .header {
-        flex-direction: column; /* Pone el título arriba y botón abajo */
-        gap: 15px;
+        flex-direction: column; 
         text-align: center;
     }
     
     .btn-home {
-        width: 100%; /* Botón ancho completo en celular */
+        width: 100%; 
         box-sizing: border-box;
         text-align: center;
     }

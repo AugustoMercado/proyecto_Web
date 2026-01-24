@@ -18,7 +18,14 @@ class Products(models.Model):
     is_kilo = models.BooleanField(default=False, verbose_name="Sold by weight?")
     is_promotion = models.BooleanField(default=False, verbose_name="Is Promotion?")
     image = models.ImageField(upload_to='products/')
+    my_order = models.PositiveIntegerField(
+        default=0, 
+        blank=False, 
+        null=False,
+    )
 
+    class Meta:
+        ordering = ['my_order']
     def __str__(self):
         return self.name 
     
