@@ -359,6 +359,29 @@ summary i, summary img {
     transform: translateY(-2px); /* Se levanta un poquito */
     filter: brightness(1.2);     /* Se ilumina al pasar el mouse */
 }
+
+
+.btn-whatsapp {
+        position: fixed;       /* Se queda quieto en la pantalla */
+        bottom: 20px;          /* Separado del piso */
+        right: 20px;           /* Separado de la derecha */
+        background-color: #25d366; /* Color Verde WhatsApp */
+        width: 60px;           /* Tamaño del botón */
+        height: 60px;
+        border-radius: 50%;    /* Redondo */
+        display: flex;         /* Centrar el ícono */
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;         /* Que quede siempre arriba de todo */
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.3); /* Sombra para que resalte */
+        transition: all 0.3s ease; /* Efecto suave al pasar el mouse */
+    }
+
+    .btn-whatsapp:hover {
+        background-color: #128c7e; /* Verde más oscuro al tocar */
+        transform: scale(1.1);     /* Se agranda un poquito */
+    }
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .nav-down ul, .nav-up ul { flex-direction: column; gap: 15px; }

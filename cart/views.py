@@ -98,7 +98,6 @@ def add_to_cart(request, product_id):
             'message': 'Debes iniciar sesión para agregar productos'
         })
 
-    # 2. Si está logueado, sigue la lógica normal...
     product = get_object_or_404(Products, id=product_id)
     cart, created = Cart.objects.get_or_create(user=request.user, active=True)
 
