@@ -343,7 +343,7 @@ summary i, summary img {
 
 /* Estilo del botón Confirmar dentro del Modal */
 #btnConfirmar {
-    cursor: pointer !important;  /* ¡AQUÍ ESTÁ LA MANITO! */
+    cursor: pointer;  /* ¡AQUÍ ESTÁ LA MANITO! */
     display: inline-block;
     padding: 10px 25px;
     border-radius: 5px;

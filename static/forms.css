@@ -1,4 +1,4 @@
-/* login.css - Formulario de Acceso */
+/* forms.css - Corregido para tu HTML */
 
 .container {
     width: 100%;
@@ -9,7 +9,7 @@
 }
 
 .createbackground {
-    background-color: var(--color-primary); /* Variable */
+    background-color: var(--color-primary, #4a69bd); /* Fallback por si falla la variable */
     padding: 40px;             
     border-radius: 20px;     
     width: 100%;
@@ -17,48 +17,64 @@
     box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
 
-.campo-formulario { margin-bottom: 20px; }
+.campo-formulario { 
+    margin-bottom: 20px; 
+    width: 100%; /* Asegurar que ocupe todo */
+}
 
-label {
+/* --- LABELS (Etiquetas) --- */
+.campo-formulario label {
     display: block;           
-    color: var(--text-light);
+    color: #ffffff;  /* Puse BLANCO fijo para que no falle */
     margin-bottom: 8px;
     font-weight: bold;
+    font-size: 16px;
 }
 
-input {
-    width: 100%;             
-    padding: 12px;            
-    border: none;
-    border-radius: 8px;
-    background-color: #f0f4ff; 
-    box-sizing: border-box;
-    font-size: 1rem;
-    color: var(--text-main);
+/* --- INPUTS (Los cuadritos) --- */
+/* Acá está el cambio: Apuntamos directo al INPUT sin clase */
+.campo-formulario input {
+    width: 100%;               /* IMPORTANTE: Que ocupe todo el ancho */
+    box-sizing: border-box;    /* Para que el padding no rompa el ancho */
+    border-radius: 12px;       /* Bordes redondos */
+    padding: 12px 15px;        /* Gorditos */
+    border: 2px solid #e9ecef; /* Borde suave */
+    
+    background-color: #f8f9fa; /* Fondo casi blanco */
+    color: #212529;            /* Texto NEGRO (Corrección clave) */
+    font-size: 16px;
+    font-weight: 500;
+    
+    outline: none;             /* Chau borde azul feo */
+    transition: all 0.3s ease;
 }
 
-input:focus {
-    outline: 2px solid var(--color-accent); /* Variable */
-    background-color: white;
+/* --- CUANDO ESCRIBÍS (Focus) --- */
+.campo-formulario input:focus {
+    background-color: #ffffff; 
+    border-color: #ff9f43;     /* Naranja al tocar */
+    box-shadow: 0 0 0 4px rgba(255, 159, 67, 0.2); 
 }
 
+/* --- EL BOTÓN --- */
 .mi-boton {
-    background-color: var(--color-accent); /* Variable */
+    background-color: var(--color-accent, #e58e26);
     color: white;
     padding: 12px 20px;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     cursor: pointer;
     font-weight: bold;
     width: 100%;             
     margin-top: 20px;
     font-size: 1.1rem;
-    transition: background 0.2s;
+    transition: transform 0.2s, background 0.2s;
 }
 
 .mi-boton:hover {
-    background-color: var(--color-accent-dark);
+    filter: brightness(1.1); /* Brilla un poquito */
+    transform: scale(1.02);
 }
 
 .create { text-align: center; color: white; margin-top: 15px; }
-.create a { color: var(--color-highlight); text-decoration: none; font-weight: bold; }
+.create a { color: #ff9f43; text-decoration: none; font-weight: bold; }
