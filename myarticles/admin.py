@@ -6,8 +6,8 @@ from adminsortable2.admin import SortableAdminMixin
 
 class ProductsAdmin(SortableAdminMixin,ImportExportModelAdmin):
     
-    list_display = ('display_image', 'name', 'price', 'stock', 'is_kilo', 'stock_status')
-    list_editable = ('price', 'stock', 'is_kilo')
+    list_display = ('display_image', 'name', 'price', 'stock', 'is_kilo', 'stock_status','image')
+    list_editable = ('price', 'stock', 'is_kilo', 'image')
     list_display_links = ('name',)
     change_list_template = 'admin/mix_final.html'
     search_fields = ('name', 'details') 
