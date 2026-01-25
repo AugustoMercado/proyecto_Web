@@ -5,6 +5,15 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
+    my_order = models.PositiveIntegerField(
+        default=0, 
+        blank=False, 
+        null=False,
+    )
+
+    class Meta:
+        
+        ordering = ['my_order']
 
     def __str__(self):
         return self.name 
