@@ -1,0 +1,100 @@
+/* ticket.css - ESTILO COMPROBANTE DIGITAL */
+
+/* Contenedor Principal (Centrado en pantalla) */
+.ticket-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh; /* Ocupa casi toda la pantalla */
+    padding: 40px 20px;
+    background-color: transparent; /* Deja ver el fondo oscuro del body */
+}
+
+/* LA TARJETA DEL TICKET */
+.ticket-card {
+    background-color: #fff; /* Fondo BLANCO para simular papel */
+    width: 100%;
+    max-width: 380px; /* Ancho de ticket real */
+    padding: 30px 25px;
+    border-radius: 5px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5); /* Sombra flotante */
+    position: relative;
+    
+    /* Borde superior Azul Estructural */
+    border-top: 8px solid #4C64B9; 
+    
+    /* Efecto "dientes de sierra" abajo */
+    background-image: linear-gradient(135deg, transparent 5px, #fff 5px), linear-gradient(225deg, transparent 5px, #fff 5px);
+    background-position: bottom;
+    background-size: 10px 10px;
+    background-repeat: repeat-x;
+    padding-bottom: 50px;
+    margin-bottom: 20px;
+}
+
+/* HEADER */
+.ticket-header { text-align: center; margin-bottom: 20px; }
+.ticket-header h1 {
+    color: #4C64B9; /* Azul */
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-weight: 800;
+}
+.subtitulo { color: #666; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+
+.ticket-info {
+    margin-top: 15px;
+    display: flex; justify-content: space-between;
+    font-size: 0.8rem; color: #888;
+    border-bottom: 1px dashed #ddd; padding-bottom: 10px;
+}
+
+/* ITEMS */
+.ticket-items { margin: 20px 0; }
+.item-row {
+    display: flex; justify-content: space-between;
+    margin-bottom: 12px; font-size: 0.95rem; color: #333;
+    border-bottom: 1px solid #f0f0f0; padding-bottom: 5px;
+}
+.item-desc .qty { font-weight: bold; margin-right: 5px; color: #4C64B9; }
+.item-desc .name { text-transform: uppercase; font-size: 0.85rem; }
+.price { font-weight: bold; }
+
+/* TOTAL */
+.ticket-total {
+    display: flex; justify-content: space-between; align-items: center;
+    margin: 20px 0; padding: 15px 0;
+    border-top: 2px dashed #333; border-bottom: 2px dashed #333;
+}
+.ticket-total span { font-size: 1.2rem; font-weight: bold; color: #333; }
+.ticket-total .monto { color: #E67E22; font-size: 1.8rem; } /* Naranja */
+
+/* QR */
+.qr-section { text-align: center; margin-top: 20px; }
+.qr-section p { font-size: 0.85rem; color: #666; margin-bottom: 10px; text-transform: uppercase; font-weight: bold; }
+
+.qr-box {
+    display: inline-block; padding: 10px;
+    border: 2px solid #333; border-radius: 10px;
+    background: white;
+}
+.qr-box img { width: 160px; height: 160px; display: block; }
+.nota-final { margin-top: 10px !important; font-size: 0.75rem !important; font-style: italic; font-weight: normal !important; }
+
+/* FOOTER */
+.ticket-footer { margin-top: 30px; text-align: center; display: flex; flex-direction: column; gap: 15px; }
+.btn-volver { text-decoration: none; color: #4C64B9; font-weight: bold; font-size: 0.9rem; }
+.btn-imprimir {
+    background-color: #333; color: white; border: none; padding: 12px;
+    border-radius: 50px; cursor: pointer; font-weight: bold; transition: background 0.2s;
+}
+.btn-imprimir:hover { background-color: #555; }
+
+/* OCULTAR NAVBAR Y FOOTER AL IMPRIMIR */
+@media print {
+    nav, footer, .btn-volver, .btn-imprimir { display: none !important; }
+    body { background-color: white; }
+    .ticket-wrapper { padding: 0; min-height: auto; }
+    .ticket-card { box-shadow: none; border: 1px solid #ddd; }
+}

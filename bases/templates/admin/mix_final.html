@@ -1,0 +1,21 @@
+{% extends "admin/change_list.html" %} 
+{% load i18n %}
+
+{% block object-tools-items %}
+    {# Botón IMPORTAR #}
+    <li>
+        <a href="import/" class="import_link" style="background-color: #28a745 !important;">
+            Importar Excel
+        </a>
+    </li>
+    
+    {# Botón EXPORTAR #}
+    <li>
+        <a href="export/{{ cl.get_query_string }}" class="export_link" style="background-color: #007bff !important;">
+            Exportar Excel
+        </a>
+    </li>
+
+    {# Los botones normales de Django (Agregar producto, etc) #}
+    {{ block.super }}
+{% endblock %}

@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'myusers',
     'myarticles',
     'cart',
-    'adminsortable2'
+    'adminsortable2',
+    'import_export'
 ]
 
 MIDDLEWARE = [
@@ -131,10 +132,13 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# --- CONFIGURACIÓN DE CORREO  ---
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'juanabrahamcorales@gmail.com' 
 EMAIL_HOST_PASSWORD = 'eumwbxwgqdrmsgkf'
+
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True

@@ -1,0 +1,181 @@
+/* product.css - Detalle del producto individual */
+
+.contenedor-detalle {
+    max-width: 800px;
+    margin: 40px auto; 
+    padding: 40px;
+    text-align: center; 
+    
+    background-color: var(--color-primary); /* Variable */
+    border-radius: 30px; 
+    box-shadow: 0 20px 60px rgba(76,100,185, 0.4);
+    color: var(--text-light);
+    position: relative;
+    overflow: hidden;
+}
+
+.detalle-imagen-box {
+    background-color: var(--bg-card);
+    width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    border-radius: 25px; 
+    border: 6px solid rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.05), 0 15px 40px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease;
+}
+
+.detalle-imagen-box:hover { transform: translateY(-5px); }
+
+.detalle-imagen-box img {
+    width: 85%; height: 85%; object-fit: contain; 
+    filter: drop-shadow(0 15px 15px rgba(0,0,0,0.4)); 
+    transition: transform 0.3s ease;
+}
+
+.detalle-imagen-box:hover img { transform: scale(1.05); }
+
+.detalle-titulo {
+    font-size: 2.2rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    line-height: 1.2;
+}
+
+.detalle-descripcion {
+    color: rgba(255,255,255,0.9);
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    font-weight: 300;
+}
+
+.detalle-precio {
+    background-color: var(--bg-card);
+    color: var(--color-accent); /* Variable */
+    display: inline-block;
+    padding: 10px 40px;
+    border-radius: 50px;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 10px 0 30px 0;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* ACCIONES DE COMPRA */
+.acciones-compra {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.controles-cantidad {
+    background-color: var(--bg-card);
+    padding: 10px 20px;
+    border-radius: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-cantidad {
+    width: 55px; height: 55px;
+    border-radius: 50%;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-cantidad:first-child { background-color: #f0f0f0; color: #333; }
+.btn-cantidad:last-child { 
+    background-color: var(--color-accent); /* Variable */
+    color: white; 
+}
+
+.btn-cantidad:hover { transform: scale(1.15); }
+.btn-cantidad:active { transform: scale(0.95); }
+
+.input-cantidad {
+    width: 60px; text-align: center; border: none; background: transparent;
+    height: 50px; font-weight: 800; font-size: 1.8rem;
+    color: var(--color-primary); /* Variable */
+}
+.input-cantidad:focus { outline: none; }
+.input-cantidad::-webkit-inner-spin-button, .input-cantidad::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+.btn-agregar-final {
+    background-color: var(--color-accent); /* Variable */
+    color: white;
+    font-size: 1.3rem;
+    padding: 15px 40px;
+    border-radius: 50px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+    transition: transform 0.2s;
+}
+.btn-agregar-final:hover {
+    transform: scale(1.05);
+    background-color: var(--color-accent-dark);
+}
+
+/* SIN STOCK */
+.aviso-agotado {
+    color: var(--color-danger); /* Variable */
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+
+.btn-disabled {
+    background-color: var(--text-muted) !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+
+
+
+@media (max-width: 768px) {
+    /* 1. Ajustar el contenedor de Historia */
+    .historia-section {
+        padding: 20px 10px; /* Menos relleno a los costados */
+    }
+    .historia-card {
+        padding: 20px; /* Achicamos el relleno interno */
+    }
+    .historia-card h2 {
+        font-size: 1.8rem; /* Título más chico */
+    }
+    .historia-card p {
+        font-size: 1rem; /* Texto de lectura más cómodo */
+    }
+
+    /* 2. Arreglar las Tarjetas de Promos (Estaban fijas en 300px) */
+    .grid-promos {
+        gap: 20px; /* Menos espacio entre tarjetas */
+    }
+    .tarjeta-promo {
+        width: 100%;       /* Que ocupe todo el ancho disponible */
+        max-width: 350px;  /* Pero que no se pase de rosca */
+        margin: 0 auto;    /* Centrada */
+    }
+    .promo-img-box {
+        height: 180px; /* Imagen un poco más baja para que entre todo */
+    }
+}

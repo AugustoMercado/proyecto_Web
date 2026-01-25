@@ -1,0 +1,389 @@
+/* styles.css - CORREGIDO (Títulos Azules, Footer Oscuro, Consistencia) */
+
+:root {
+    /* --- PALETA DE COLORES --- */
+    --color-primary: #4C64B9;       /* AZUL: Estructura */
+    --color-primary-dark: #3b4e91;  
+    --color-accent: #E67E22;        /* NARANJA: Solo Venta/Precios */
+    --color-accent-dark: #d35400;   
+    --color-highlight: #f1c40f;     
+    --color-success: #2ecc71;       
+    --color-danger: #e74c3c;        
+    --color-whatsapp: #25D366;      
+
+    /* --- FONDOS Y TEXTOS --- */
+    --bg-body: #121212;             
+    --bg-card: #1e1e1e;             
+    --text-main: #e0e0e0;           
+    --text-secondary: #b0b0b0;      
+    --text-muted: #666666;          
+    --text-light: #ffffff;          
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: Arial, sans-serif;
+    min-height: 100vh;        
+    display: flex;          
+    flex-direction: column;   
+}
+
+.container {
+    width: 100%;
+    max-width: 95%; 
+    margin: 0 auto;
+    padding: 20px; 
+}
+
+/* --- PUNTO 1 y 4: TÍTULOS UNIFICADOS --- */
+.title { 
+    text-align: center; 
+    color: var(--color-primary); /* AZUL (Estructura) */
+    margin-bottom: 20px; 
+    text-transform: uppercase; /* FUERZA MAYÚSCULAS (Consistencia) */
+    letter-spacing: 1px;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.sub-title { 
+    text-align: left; 
+    color: var(--text-secondary); 
+    text-transform: uppercase; /* Consistencia en subtítulos también */
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+/* NAVBAR */
+.nav-down, .nav-up {
+    background-color: var(--color-primary); 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    padding: 15px 0; 
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav-down ul, .nav-up ul {
+    display: flex; justify-content: space-evenly; list-style: none; align-items: center;
+}
+
+.nav-down ul li a, .nav-up ul li a {
+    color: var(--text-light); text-decoration: none; font-size: 1.1rem; 
+    font-weight: bold; padding: 8px 15px; border-radius: 20px; transition: all 0.3s ease;
+}
+
+.nav-down ul li a:hover, .nav-up ul li a:hover {
+    background-color: rgba(255,255,255,0.1); color: var(--text-light);
+}
+/* --- ESTILOS CORREGIDOS: NAVBAR, BUSCADOR Y PERFIL --- */
+
+/* 1. EL BUSCADOR (Estilo Cápsula Moderna) */
+.search-form {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.15); /* Fondo transparente sutil */
+    border-radius: 50px;       /* Bien redondo */
+    padding: 5px 15px;         /* Aire interno */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borde finito elegante */
+    transition: all 0.3s ease;
+}
+
+.search-form:hover, .search-form:focus-within {
+    background-color: rgba(255, 255, 255, 0.25); /* Más claro al usarlo */
+    border-color: var(--color-accent); /* Borde Naranja al escribir */
+    box-shadow: 0 0 10px rgba(230, 126, 34, 0.2);
+}
+
+.search-input {
+    background: transparent;   /* Sin fondo blanco feo */
+    border: none;
+    outline: none;             /* Chau borde azul por defecto */
+    color: white;              /* Texto blanco */
+    font-size: 0.95rem;
+    width: 120px;              /* Ancho inicial */
+    transition: width 0.3s ease;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.7); /* Placeholder gris claro */
+}
+
+.search-input:focus {
+    width: 200px; /* Se estira al escribir */
+}
+
+.search-button {
+    background: transparent;   /* Botón invisible */
+    border: none;
+    color: white;              /* Lupa blanca */
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 0 5px;
+    transition: transform 0.2s;
+}
+
+.search-button:hover {
+    color: var(--color-accent); /* Lupa naranja al pasar mouse */
+    transform: scale(1.1);
+}
+
+/* 2. EL MENÚ DE USUARIO (Perfil "Jorge") */
+
+/* El contenedor principal (detalles) */
+.mi-menu {
+    position: relative; /* Para que el menú flotante se pegue a esto */
+    margin-left: 20px;
+}
+
+/* El botón visible (Resumen) */
+summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;                 /* Espacio entre icono y nombre */
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 8px 15px;
+    border-radius: 30px;
+    transition: background 0.3s;
+    list-style: none;          /* Borra la flecha por defecto (Standard) */
+}
+
+/* Borra la flecha por defecto (Chrome/Safari) */
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary:hover {
+    background-color: rgba(255, 255, 255, 0.15); /* Efecto hover suave */
+}
+
+/* El icono del usuario */
+summary i, summary img {
+    font-size: 1.3rem;
+    color: var(--color-accent); /* Icono Naranja para destacar */
+}
+
+/* 3. EL MENÚ DESPLEGABLE (Lo que se abre) */
+.menu-desplegable {
+    position: absolute;        /* Flotante */
+    top: 120%;                 /* Justo debajo del nombre */
+    right: 0;                  /* Alineado a la derecha */
+    width: 200px;
+    
+    background-color: var(--bg-card); /* Fondo Oscuro */
+    border: 1px solid var(--color-primary); /* Borde Azul */
+    border-radius: 15px;
+    
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Sombra fuerte para que flote */
+    z-index: 2000;             /* Siempre arriba de todo */
+    overflow: hidden;
+}
+
+/* Flechita decorativa arriba del menú */
+.menu-desplegable::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 20px;
+    width: 12px;
+    height: 12px;
+    background-color: var(--bg-card);
+    border-top: 1px solid var(--color-primary);
+    border-left: 1px solid var(--color-primary);
+    transform: rotate(45deg);
+}
+
+/* Los enlaces dentro del menú */
+.menu-desplegable a {
+    color: var(--text-main);
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-desplegable a:hover {
+    background-color: var(--color-primary); /* Azul al pasar mouse */
+    color: white;
+    transform: translateX(5px); /* Pequeño movimiento */
+}
+/* --- PUNTO 2: FOOTER OSCURO --- */
+.main-footer {
+    background-color: var(--bg-card); /* FONDO OSCURO (No más azul invasivo) */
+    color: var(--text-secondary);
+    margin-top: auto;
+    padding-top: 50px;
+    border-top: 5px solid var(--color-primary); /* Detalle azul sutil arriba */
+}
+
+.footer-container {
+    display: flex; justify-content: space-around; flex-wrap: wrap;
+    max-width: 1200px; margin: 0 auto; padding: 0 20px 40px 20px; gap: 30px;
+}
+
+.footer-col h3 {
+    color: var(--color-primary); /* Títulos en AZUL */
+    font-size: 1.2rem; margin-bottom: 20px;
+    border-bottom: 2px solid var(--color-accent); /* Detalle naranja sutil */
+    padding-bottom: 10px; display: inline-block;
+    text-transform: uppercase;
+}
+
+.footer-col p { color: var(--text-secondary); line-height: 1.6; }
+
+.footer-col ul { list-style: none; padding: 0; }
+.footer-col ul li { margin-bottom: 10px; }
+
+.footer-col ul li a {
+    color: var(--text-main); text-decoration: none; transition: all 0.3s;
+}
+
+.footer-col ul li a:hover {
+    color: var(--color-accent); /* Links se ponen NARANJA al pasar mouse */
+    padding-left: 5px;
+}
+
+.footer-bottom {
+    background-color: #111; /* Casi negro para el final */
+    text-align: center; padding: 20px; font-size: 0.85rem; color: #666;
+    border-top: 1px solid #333;
+}
+
+/* --- TOAST NOTIFICACIÓN (PEGAR AL FINAL DE STYLES.CSS) --- */
+#toast-box {
+    position: fixed;
+    bottom: 30px;        
+    right: 30px;         
+    background-color: var(--color-success); /* Verde por defecto */
+    color: white;
+    padding: 15px 25px;
+    border-radius: 50px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    font-weight: bold;
+    font-size: 1.1rem;
+    z-index: 9999; /* Siempre arriba */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.toast-hidden {
+    opacity: 0;
+    transform: translateY(100px); /* Escondido abajo */
+    pointer-events: none; 
+}
+
+.toast-visible {
+    opacity: 1;
+    transform: translateY(0); /* Visible en su lugar */
+}
+
+
+.modal-box {
+    background-color: var(--bg-card) !important; /* Fondo Oscuro (#1e1e1e) */
+    color: var(--text-main) !important;          /* Texto claro */
+    border: 1px solid var(--color-primary);      /* Borde azul finito elegante */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);     /* Sombra profunda */
+    border-radius: 15px;                         /* Bordes redondeados */
+    padding: 30px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+/* Título del Modal */
+.modal-box h3 {
+    color: white !important;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* Texto del cuerpo */
+.modal-box p {
+    color: #ccc !important; /* Gris clarito */
+    font-size: 1rem;
+    margin-bottom: 25px;
+}
+
+/* El botón Cancelar también necesita retoque para no verse raro */
+.btn-cancelar {
+    background-color: #333;
+    color: white;
+    border: 1px solid #555;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-cancelar:hover {
+    background-color: #444;
+}
+
+
+/* Estilo del botón Confirmar dentro del Modal */
+#btnConfirmar {
+    cursor: pointer;  /* ¡AQUÍ ESTÁ LA MANITO! */
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* Sombra para que flote */
+}
+
+#btnConfirmar:hover {
+    transform: translateY(-2px); /* Se levanta un poquito */
+    filter: brightness(1.2);     /* Se ilumina al pasar el mouse */
+}
+
+
+.btn-whatsapp {
+        position: fixed;       /* Se queda quieto en la pantalla */
+        bottom: 20px;          /* Separado del piso */
+        right: 20px;           /* Separado de la derecha */
+        background-color: #25d366; /* Color Verde WhatsApp */
+        width: 60px;           /* Tamaño del botón */
+        height: 60px;
+        border-radius: 50%;    /* Redondo */
+        display: flex;         /* Centrar el ícono */
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;         /* Que quede siempre arriba de todo */
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.3); /* Sombra para que resalte */
+        transition: all 0.3s ease; /* Efecto suave al pasar el mouse */
+    }
+
+    .btn-whatsapp:hover {
+        background-color: #128c7e; /* Verde más oscuro al tocar */
+        transform: scale(1.1);     /* Se agranda un poquito */
+    }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .nav-down ul, .nav-up ul { flex-direction: column; gap: 15px; }
+    .footer-container { flex-direction: column; text-align: center; }
+}

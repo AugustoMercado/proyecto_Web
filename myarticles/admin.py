@@ -1,12 +1,15 @@
 from django.contrib import admin
 from django.utils.html import format_html, mark_safe 
 from .models import Products, Category, Promotions
+from import_export.admin import ImportExportModelAdmin
 from adminsortable2.admin import SortableAdminMixin
 
-class ProductsAdmin(SortableAdminMixin,admin.ModelAdmin):
+class ProductsAdmin(SortableAdminMixin,ImportExportModelAdmin):
+    
     list_display = ('display_image', 'name', 'price', 'stock', 'is_kilo', 'stock_status')
     list_editable = ('price', 'stock', 'is_kilo')
     list_display_links = ('name',)
+    change_list_template = 'admin/mix_final.html'
     search_fields = ('name', 'details') 
     list_filter = ('category',)
 

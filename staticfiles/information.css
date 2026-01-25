@@ -1,0 +1,130 @@
+/* information.css - MODO DARK */
+
+.info-header {
+    text-align: center;
+    color: var(--color-accent); /* Título Naranja */
+    padding: 30px 20px 10px;
+}
+.info-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* TARJETAS OSCURAS */
+.info-card {
+    background-color: var(--bg-card); /* Gris Oscuro */
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3); /* Sombra más oscura */
+    transition: transform 0.3s ease;
+    border-bottom: 5px solid var(--color-primary-dark); /* Borde Naranja abajo */
+    height: 100%;
+}
+
+.info-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(34, 86, 230, 0.2); 
+}
+
+.icono {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    display: block;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); /* Brillo sutil */
+}
+
+.info-card h2 {
+    color: var(--text-light); /* Blanco */
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.info-card p {
+    color: var(--text-secondary); /* Gris claro */
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.nota-extra {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* CONTACTO */
+.datos-contacto p {
+    background-color: #2a2a2a; /* Fondo un pelín más claro que la tarjeta */
+    color: var(--text-main);
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+    border: 1px solid #333;
+}
+
+.btn-contacto {
+    display: inline-block;
+    background-color: var(--color-accent); /* Botón Naranja */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.btn-contacto:hover {
+    background-color: var(--color-accent-dark);
+}
+
+/* HORARIOS */
+.lista-horarios {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-horarios li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #333; /* Líneas separadoras oscuras */
+    color: var(--text-secondary);
+}
+
+.lista-horarios li:last-child {
+    border-bottom: none;
+}
+
+/* MAPA */
+.mapa-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.titulo-mapa {
+    color: var(--color-accent); /* Título Naranja */
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.mapa-box {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 2px solid #333; /* Borde sutil */
+}

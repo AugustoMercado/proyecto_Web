@@ -1,0 +1,134 @@
+/* promsdetails.css - MODO DARK & REGLA 5 (NARANJA) */
+
+.contenedor-detalle-promo {
+    max-width: 800px;
+    margin: 40px auto;
+    
+    /* Regla 5: Card oscura */
+    background-color: var(--bg-card); 
+    color: var(--text-main);
+    
+    border-radius: 25px;
+    padding: 40px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    /* Regla 5: Borde Naranja */
+    border: 2px solid var(--color-accent); 
+}
+
+.titulo-promo-detalle {
+    color: var(--color-accent); /* Regla 5: Título Naranja */
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.img-promo-gigante {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    background-color: transparent;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.descripcion-lista {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    
+    background-color: #252525; /* Fondo un poco más claro para leer */
+    color: var(--text-light);
+    
+    padding: 25px;
+    border-radius: 15px;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 30px;
+    
+    /* Decoración Naranja */
+    border-left: 5px solid var(--color-accent); 
+}
+
+.precio-gigante {
+    background-color: #333;
+    color: var(--color-accent); /* Regla 5: Precio Naranja */
+    padding: 10px 30px;
+    border-radius: 50px;
+    
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(230, 126, 34, 0.2);
+    border: 1px solid var(--color-accent);
+}
+
+/* El botón de volver */
+.btn-volver {
+    text-decoration: none;
+    color: var(--text-secondary);
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: color 0.3s;
+    border: 1px solid #444;
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.btn-volver:hover { 
+    color: white; 
+    border-color: white;
+}
+
+.btn-agregar-final {
+    background-color: var(--color-accent); /* Botón Naranja */
+    color: white;
+    font-size: 1.3rem;
+    padding: 15px 40px;
+    border-radius: 50px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+    transition: transform 0.2s;
+}
+
+.btn-agregar-final:hover {
+    transform: scale(1.05);
+    background-color: var(--color-accent-dark);
+}
+
+/* TOAST (Notificación) */
+#toast-box {
+    position: fixed;
+    bottom: 30px;        
+    right: 30px;         
+    background-color: var(--color-success); 
+    color: white;
+    padding: 15px 25px;
+    border-radius: 50px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    font-weight: bold;
+    font-size: 1.1rem;
+    z-index: 9999;       
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toast-hidden { opacity: 0; transform: translateY(100px); pointer-events: none; }
+.toast-visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .contenedor-detalle-promo { width: 95%; margin: 20px auto; padding: 20px; }
+    .titulo-promo-detalle { font-size: 1.8rem; }
+    .precio-gigante { font-size: 2rem; padding: 8px 20px; }
+    .btn-agregar-final { width: 100%; }
+}
