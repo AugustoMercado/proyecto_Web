@@ -6,7 +6,7 @@ def display_main(request):
     """
     Renders the main homepage with 10 random products and active promotions.
     """
-    random_products = Products.objects.all().order_by('?')[:10]
+    random_products = Products.objects.filter(category__is_active=True).order_by('?')[:10]
     promos = Products.objects.filter(is_promotion=True)
     
     return render(request, 'main/main.html', {
