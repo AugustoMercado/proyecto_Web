@@ -36,10 +36,13 @@ class ProductsAdmin(SortableAdminMixin,ImportExportModelAdmin):
     stock_status.short_description = "Status"
 
 class CategoryAdmin(SortableAdminMixin,admin.ModelAdmin):
-    list_display = ('id', 'name')
+    list_display = ('name', 'is_active', 'my_order')
+    
+    
+    list_editable = ('is_active', )
+    
     search_fields = ('name',)
     list_display_links = ('name',)
-    
 
 admin.site.register(Products, ProductsAdmin)
 admin.site.register(Category, CategoryAdmin)

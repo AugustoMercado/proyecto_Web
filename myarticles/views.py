@@ -18,7 +18,7 @@ def display_categories(request):
     """
     Renders the page listing all available product categories.
     """
-    categories = Category.objects.all()
+    categories = Category.objects.filter(is_active=True).order_by('my_order')
     return render(request, 'Articles/Articles.html', {
         'categories': categories
     })

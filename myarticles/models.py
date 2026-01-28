@@ -5,6 +5,7 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
+    is_active = models.BooleanField(default=True, verbose_name='show?')
     my_order = models.PositiveIntegerField(
         default=0, 
         blank=False, 
