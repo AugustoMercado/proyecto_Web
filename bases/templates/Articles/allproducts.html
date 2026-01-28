@@ -4,7 +4,8 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'allproducts.css' %}">
 
-    <div style="text-align: center; margin: 20px 0; color: white;">
+    <div style="text-align: center; margin: 20px 0; color: white; text-transform: uppercase;
+        letter-spacing: 0.06em;">
         {% if query %}
             <h1 style="color: var(--color-accent);">Resultados para: "{{ query }}"</h1>
         {% elif category %}
