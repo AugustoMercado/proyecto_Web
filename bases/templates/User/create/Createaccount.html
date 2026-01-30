@@ -2,58 +2,55 @@
 {% load static %}
 
 {% block content %}
-
 <link rel="stylesheet" href="{% static 'forms.css' %}">
-    <div class="container">
-        <div class="createbackground">
-            
-            <h2 class="title" style="color: white; margin-bottom: 25px; font-size: 1.8rem;">Crear Cuenta</h2>
 
-            <form method="POST">
-                {% csrf_token %}
-                
-                <div class="campo-formulario">
-                    <label>Nombre</label>
-                    <input type="text" name="name" required placeholder="Tu nombre"> 
-                </div>
+<div class="container">
+    <div class="createbackground">
+        <h2 class="title" style="color: white; margin-bottom: 25px; font-size: 1.8rem;">Crear Cuenta</h2>
 
-                <div class="campo-formulario">
-                    <label>Apellido</label>
-                    <input type="text" name="lastname" required placeholder="Tu apellido">
-                </div>
+        <form method="POST">
+            {% csrf_token %}
 
-                <div class="campo-formulario">
-                    <label>Correo Electrónico</label>
-                    <input type="email" name="email" required placeholder="ejemplo@email.com">
-                </div>
-                
-                <div class="campo-formulario">
-                    <label>Contraseña</label>
-                    <input type="password" name="password" required>
-                </div>
-                
-                <div class="campo-formulario">
-                    <label>Repetir Contraseña</label>
-                    <input type="password" name="confirm_password" required>
-                </div>
-
-                {% if error %}
-                    <div style="background-color: #ff4757; color: white; padding: 10px; border-radius: 8px; margin-bottom: 15px; text-align: center; font-weight: bold;">
-                        {{ error }}
-                    </div>
-                {% endif %}
-
-                <div class="boton-container">
-                    <button type="submit" class="mi-boton">Registrarme</button>
-                </div>
-
-            </form>
-
-            <div class="create">
-                <p>¿Ya tienes cuenta? <a href="{% url 'login' %}">Ingresar</a></p>
+            <div class="campo-formulario">
+                <label>Nombre</label>
+                <input type="text" name="name" placeholder="Tu nombre" required>
             </div>
 
+            <div class="campo-formulario">
+                <label>Apellido</label>
+                <input type="text" name="lastname" placeholder="Tu apellido" required>
+            </div>
+
+            <div class="campo-formulario">
+                <label>Correo Electrónico</label>
+                <input type="email" name="email" placeholder="ejemplo@email.com" required>
+            </div>
+
+            <div class="campo-formulario">
+                <label>Contraseña</label>
+                <input type="password" name="password" required>
+            </div>
+
+            <div class="campo-formulario">
+                <label>Repetir Contraseña</label>
+                <input type="password" name="confirm_password" required>
+            </div>
+
+            {% if error %}
+            <div style="background-color: #ff4757; color: white; padding: 10px; border-radius: 8px; margin-bottom: 15px; text-align: center; font-weight: bold;">
+                {{ error }}
+            </div>
+            {% endif %}
+
+            <div class="boton-container">
+                <button type="submit" class="mi-boton">Registrarme</button>
+            </div>
+        </form>
+
+        <div class="create">
+            <p>¿Ya tienes cuenta? <a href="{% url 'login' %}">Ingresar</a></p>
         </div>
     </div>
+</div>
 
 {% endblock %}

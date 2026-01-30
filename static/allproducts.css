@@ -1,13 +1,9 @@
-/* allproducts.css - CORRECCIÓN ESPACIOS VACÍOS */
+/* Grid layout for products display */
 
 .grilla-final {
     display: grid;
-    /* Ajustamos a 220px para que entren más productos y se vea más lleno */
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    
-    /* PUNTO 3: CENTRAR GRILLA */
-    justify-content: center; 
-    
+    justify-content: center;
     gap: 30px;
     width: 100%;
     padding: 40px;
@@ -16,7 +12,7 @@
 }
 
 .producto {
-    background-color: var(--bg-card); 
+    background-color: var(--bg-card);
     padding: 20px;
     border-radius: 20px;
     display: flex;
@@ -27,13 +23,13 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
     color: var(--text-main);
-    position: relative; 
+    position: relative;
     border: 1px solid #333;
 }
 
 .producto:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0 20px rgba(76, 100, 185, 0.4); /* Glow Azul */
+    box-shadow: 0 0 20px rgba(76, 100, 185, 0.4);
     border-color: var(--color-primary);
     cursor: pointer;
     background-color: #252525;
@@ -58,7 +54,7 @@
 
 .precio {
     font-weight: 800;
-    color: var(--color-accent); /* PRECIO NARANJA (Correcto) */
+    color: var(--color-accent);
     background: #333;
     padding: 5px 15px;
     border-radius: 15px;
@@ -76,23 +72,51 @@
     margin-bottom: 15px;
 }
 
-/* BADGES */
-.badge-stock, .badge-agotado {
-    position: absolute; top: 15px; right: 15px; padding: 6px 12px;
-    border-radius: 8px; font-weight: bold; font-size: 0.8rem; color: white;
-    z-index: 10; box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+/* Badges */
+.badge-stock,
+.badge-agotado {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: white;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
-.badge-stock { background-color: var(--color-success); }
-.badge-agotado { background-color: var(--color-danger); }
-.sin-stock-img { filter: grayscale(100%); opacity: 0.5; }
 
-/* RESPONSIVE */
+.badge-stock {
+    background-color: var(--color-success);
+}
+
+.badge-agotado {
+    background-color: var(--color-danger);
+}
+
+.sin-stock-img {
+    filter: grayscale(100%);
+    opacity: 0.5;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
     .grilla-final {
-        padding: 15px; gap: 15px;
+        padding: 15px;
+        gap: 15px;
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     }
-    .producto { padding: 15px; }
-    .producto img { height: 140px; }
-    .precio { font-size: 1.1rem; }
+
+    .producto {
+        padding: 15px;
+    }
+
+    .producto img {
+        height: 140px;
+    }
+
+    .precio {
+        font-size: 1.1rem;
+    }
 }

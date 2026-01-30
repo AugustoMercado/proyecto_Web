@@ -1,41 +1,50 @@
 
-function showToast(mensaje) {
-    const toast = document.getElementById('toast-box');
-    const texto = document.getElementById('toast-message');
-    if (texto) texto.innerText = mensaje;
+/**
+ * Displays a toast notification with the given message.
+ */
+function showToast(message) {
+    const toastBox = document.getElementById('toast-box');
+    const toastMessage = document.getElementById('toast-message');
     
-    if (toast) {
-        toast.classList.remove('toast-hidden');
-        toast.classList.add('toast-visible');
+    if (toastMessage) toastMessage.innerText = message;
+    
+    if (toastBox) {
+        toastBox.classList.remove('toast-hidden');
+        toastBox.classList.add('toast-visible');
         setTimeout(() => {
-            toast.classList.remove('toast-visible');
-            toast.classList.add('toast-hidden');
+            toastBox.classList.remove('toast-visible');
+            toastBox.classList.add('toast-hidden');
         }, 3000);
     }
 }
 
 
+/**
+ * Updates quantity input for a product.
+ */
 function changeValue(productId, change) {
     const input = document.getElementById(`quantity-${productId}`);
-    if (input) {
-        let currentValue = parseInt(input.value) || 0;
-        let max = parseInt(input.getAttribute('max'));
-        let newValue = currentValue + change;
-        
-        if (newValue >= 1 && newValue <= max) {
-            input.value = newValue;
-        }
+    if (!input) return;
+    
+    let currentValue = parseInt(input.value) || 0;
+    const maxValue = parseInt(input.getAttribute('max'));
+    const newValue = currentValue + change;
+    
+    if (newValue >= 1 && newValue <= maxValue) {
+        input.value = newValue;
     }
 }
 
+/**
+ * Handles add to cart request with validation.
+ */
 function processAddToCart(productId, isKiloStr) {
     const input = document.getElementById(`quantity-${productId}`);
     const quantity = input ? parseInt(input.value) : 1;
     
     const isKilo = (isKiloStr === 'True' || isKiloStr === 'true');
     if (isKilo && quantity < 50) {
-        // Usamos el Toast también para validaciones locales
-        showToast("⚠️ El mínimo son 50 gramos."); 
+        showToast("⚠️ El mínimo son 50 gramos.");
         return;
     }
     
@@ -43,134 +52,144 @@ function processAddToCart(productId, isKiloStr) {
 
     fetch(url)
         .then(response => response.json())
-        .then(data => {
-            if (data.status === 'ok') {
-                // CASO 1: ÉXITO (Verde)
-                // Cambiamos el fondo a verde (si tenés una clase para eso) o usamos el default
-                const toast = document.getElementById('toast-box');
-                toast.style.backgroundColor = "var(--color-success)"; // Verde
-                showToast("✅ " + data.message);
-                
-            } else if (data.status === 'login_required') {
-                // CASO 2: FALTA LOGIN (Naranja/Rojo)
-                const toast = document.getElementById('toast-box');
-                toast.style.backgroundColor = "var(--color-danger)"; // Rojo/Naranja para alerta
-                showToast("🔒 " + data.message);
-                
-                // Esperamos 2 segundos para que lea el cartel y luego redirigimos
-                setTimeout(() => {
-                    window.location.href = "/login/"; 
-                }, 2000);
-
-            } else {
-                // CASO 3: ERROR GENERICO (Rojo)
-                const toast = document.getElementById('toast-box');
-                toast.style.backgroundColor = "var(--color-danger)";
-                showToast("❌ " + (data.message || "Ocurrió un error"));
-            }
-        })
+        .then(data => handleAddToCartResponse(data))
         .catch(error => {
             console.error('Error:', error);
             showToast("❌ Error de conexión");
         });
 }
 
-
-function updateQty(productId, action, urlBorrado) {
-    var url = '/cart/update_item/' + productId + '/' + action + '/';
+/**
+ * Processes add to cart response and shows appropriate toast.
+ */
+function handleAddToCartResponse(data) {
+    const toastBox = document.getElementById('toast-box');
     
-    // VALIDACIÓN EN INGLÉS ('subtract')
-    if (action === 'subtract') { 
-        var qtySpan = document.getElementById('qty-' + productId);
-        // Si es 1 y tocan subtract, preguntamos si quiere borrar
+    if (data.status === 'ok') {
+        toastBox.style.backgroundColor = "var(--color-success)";
+        showToast("✅ " + data.message);
+    } else if (data.status === 'login_required') {
+        toastBox.style.backgroundColor = "var(--color-danger)";
+        showToast("🔒 " + data.message);
+        setTimeout(() => {
+            window.location.href = "/login/";
+        }, 2000);
+    } else {
+        toastBox.style.backgroundColor = "var(--color-danger)";
+        showToast("❌ " + (data.message || "Ocurrió un error"));
+    }
+}
+
+
+/**
+ * Updates cart item quantity or removes it.
+ */
+function updateQty(productId, action, deleteUrl) {
+    const url = `/cart/update_item/${productId}/${action}/`;
+    
+    if (action === 'subtract') {
+        const qtySpan = document.getElementById(`qty-${productId}`);
         if (qtySpan && parseInt(qtySpan.innerText) <= 1) {
-            ask_delete(urlBorrado); 
-            return; 
+            askDelete(deleteUrl);
+            return;
         }
     }
 
     fetch(url)
-    .then(response => response.json())
-    .then(data => {
-        var totalSpan = document.getElementById('total-carrito');
-        if (totalSpan) totalSpan.innerText = data.total;
-        
-        // RESPUESTA EN INGLÉS (.quantity)
-        if (data.quantity === 0) {
-            var tarjeta = document.getElementById('producto-' + productId);
-            if (tarjeta) tarjeta.remove();
-        } else {
-            var qtySpan = document.getElementById('qty-' + productId);
-            if (qtySpan) qtySpan.innerText = data.quantity; // <--- data.quantity
-        }
-    })
-    .catch(error => console.error('Error:', error));
+        .then(response => response.json())
+        .then(data => updateCartDisplay(data, productId))
+        .catch(error => console.error('Error:', error));
 }
 
-
-function ask_delete(url) {
-    const modal = document.getElementById('modalBorrar');
-    if(modal) {
-        modal.querySelector('h3').innerText = "¿Estás seguro?";
-        modal.querySelector('p').innerText = "Vas a eliminar este producto.";
-        
-        const btn = document.getElementById('btnConfirmar');
-        btn.innerText = "Sí, eliminar";       // TEXTO DE BORRADO
-        btn.style.backgroundColor = "#e74c3c"; // ROJO (Peligro)
-        
-        // Comportamiento normal de link
-        btn.onclick = null; 
-        btn.href = url;
-        
-        modal.style.display = 'flex';
+/**
+ * Updates cart display after quantity change.
+ */
+function updateCartDisplay(data, productId) {
+    const totalSpan = document.getElementById('total-carrito');
+    if (totalSpan) totalSpan.innerText = data.total;
+    
+    if (data.quantity === 0) {
+        const card = document.getElementById(`producto-${productId}`);
+        if (card) card.remove();
+    } else {
+        const qtySpan = document.getElementById(`qty-${productId}`);
+        if (qtySpan) qtySpan.innerText = data.quantity;
     }
 }
 
-function ask_cancel_cart(url) {
+
+/**
+ * Shows confirmation modal for item deletion.
+ */
+function askDelete(url) {
     const modal = document.getElementById('modalBorrar');
-    if(modal) {
-        modal.querySelector('h3').innerText = "¿Vaciar Carrito?";
-        modal.querySelector('p').innerText = "Se perderán todos los productos seleccionados.";
-        document.getElementById('btnConfirmar').href = url;
-        modal.style.display = 'flex';
-    }
+    if (!modal) return;
+    
+    modal.querySelector('h3').innerText = "¿Estás seguro?";
+    modal.querySelector('p').innerText = "Vas a eliminar este producto.";
+    
+    const btn = document.getElementById('btnConfirmar');
+    btn.innerText = "Sí, eliminar";
+    btn.style.backgroundColor = "#e74c3c";
+    btn.onclick = null;
+    btn.href = url;
+    
+    modal.style.display = 'flex';
 }
 
-function Closemodal() {
+/**
+ * Shows confirmation modal for clearing entire cart.
+ */
+function askCancelCart(url) {
     const modal = document.getElementById('modalBorrar');
-    if(modal) modal.style.display = 'none';
+    if (!modal) return;
+    
+    modal.querySelector('h3').innerText = "¿Vaciar Carrito?";
+    modal.querySelector('p').innerText = "Se perderán todos los productos seleccionados.";
+    document.getElementById('btnConfirmar').href = url;
+    
+    modal.style.display = 'flex';
 }
 
-function pagarTotal(urlDestino) {
+/**
+ * Closes the modal dialog.
+ */
+function closeModal() {
+    const modal = document.getElementById('modalBorrar');
+    if (modal) modal.style.display = 'none';
+}
+
+/**
+ * Shows success modal and redirects to destination.
+ */
+function payTotal(destinationUrl) {
     const modal = document.getElementById('modalExito');
-    if(modal) {
-        modal.style.display = 'flex';
-        setTimeout(function() {
-            window.location.href = urlDestino;
-        }, 2000);
-    }
+    if (!modal) return;
+    
+    modal.style.display = 'flex';
+    setTimeout(() => {
+        window.location.href = destinationUrl;
+    }, 2000);
 }
 
-function ask_confirm_order(url) {
+/**
+ * Shows confirmation modal for order completion.
+ */
+function askConfirmOrder(url) {
     const modal = document.getElementById('modalBorrar');
-    if(modal) {
-        modal.querySelector('h3').innerText = "¿Confirmar Pedido?";
-        modal.querySelector('p').innerText = "Estás a un paso de finalizar tu compra.";
-        
-        const btn = document.getElementById('btnConfirmar');
-        btn.innerText = "Sí, Comprar";
-        
-        // --- CAMBIO DE COLOR AQUÍ ---
-        btn.style.backgroundColor = "#E67E22"; // TU NARANJA DE MARCA (Mucho mejor)
-        // Si preferís el Azul de la marca usa: "#4C64B9"
-        
-        btn.removeAttribute('href'); 
-        
-        btn.onclick = function() { 
-            Closemodal();     
-            pagarTotal(url);  
-        };
-        
-        modal.style.display = 'flex';
-    }
+    if (!modal) return;
+    
+    modal.querySelector('h3').innerText = "¿Confirmar Pedido?";
+    modal.querySelector('p').innerText = "Estás a un paso de finalizar tu compra.";
+    
+    const btn = document.getElementById('btnConfirmar');
+    btn.innerText = "Sí, Comprar";
+    btn.style.backgroundColor = "#E67E22";
+    btn.removeAttribute('href');
+    btn.onclick = () => {
+        closeModal();
+        payTotal(url);
+    };
+    
+    modal.style.display = 'flex';
 }

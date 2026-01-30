@@ -14,23 +14,20 @@ def display_login(request):
     If POST, validates credentials and logs the user in.
     """
     if request.user.is_authenticated:
-        return redirect('main') 
- 
+        return redirect('main')
+    
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
-        
         if form.is_valid():
-            user = form.get_user()
-            login(request, user)  
-            return redirect('main') 
-        else:
-            return render(request, 'User/login/Loginaccount.html', {
-                'form': form,
-                'error': "Invalid username or password"
-            })
+            login(request, form.get_user())
+            return redirect('main')
+        return render(request, 'User/login/Loginaccount.html', {
+            'form': form,
+            'error': "Invalid username or password"
+        })
 
-    form = AuthenticationForm()
-    return render(request, 'User/login/Loginaccount.html', {'form': form})
+    return render(request, 'User/login/Loginaccount.html', 
+                  {'form': AuthenticationForm()})
 
 def logout_account(request):
     """
@@ -55,48 +52,71 @@ def display_create_account(request):
     """
     if request.method == 'GET':
         return render(request, 'User/create/Createaccount.html')
-    else:
-        first_name = request.POST.get('name')          
-        last_name = request.POST.get('lastname')  
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        confirm_password = request.POST.get('confirm_password')
+    
+    return handle_user_registration(request)
 
-        if password != confirm_password:
-             return render(request, 'User/create/Createaccount.html', {'error': 'Passwords do not match'})
 
-        if User.objects.filter(username=email).exists():
-             return render(request, 'User/create/Createaccount.html', {'error': 'Email already exists'})
+def handle_user_registration(request):
+    """
+    Processes and validates user registration data.
+    """
+    first_name = request.POST.get('name')
+    last_name = request.POST.get('lastname')
+    email = request.POST.get('email')
+    password = request.POST.get('password')
+    confirm_password = request.POST.get('confirm_password')
+    
+    error = validate_registration_data(email, password, confirm_password)
+    if error:
+        return render(request, 'User/create/Createaccount.html', {'error': error})
+    
+    user = User.objects.create_user(
+        username=email,
+        email=email,
+        password=password,
+        first_name=first_name,
+        last_name=last_name
+    )
+    
+    login(request, user)
+    return redirect('main')
 
-        user = User.objects.create_user(
-            username=email,      
-            email=email,
-            password=password,
-            first_name=first_name,     
-            last_name=last_name   
-        )
 
-        login(request, user)
-        return redirect('main')
+def validate_registration_data(email, password, confirm_password):
+    """
+    Validates registration form data.
+    Returns error message if validation fails, None otherwise.
+    """
+    if password != confirm_password:
+        return 'Las contraseñas no coinciden'
+    
+    if User.objects.filter(username=email).exists():
+        return 'El correo ya está registrado'
+    
+    return None
 
 @staff_member_required(login_url='main')
 def owner_dashboard(request):
     """
     Renders the business owner's dashboard.
-    Calculates total income based only on PAID carts.
-    Checks for low stock products.
+    Displays total income from paid carts, sales count, recent orders, and low stock products.
     """
     closed_carts = Cart.objects.filter(active=False).order_by('-day_buy')
-    
-    paid_carts = closed_carts.filter(is_paid=True) 
-    
-    total_income = sum(cart.get_total() for cart in paid_carts)
-
+    paid_carts = closed_carts.filter(is_paid=True)
     low_stock_products = Products.objects.filter(stock__lte=10).order_by('stock')
+    
+    total_income = calculate_total_income(paid_carts)
 
     return render(request, 'User/owner_dashboard.html', {
         'total_income': total_income,
-        'total_sales_count': paid_carts.count(), 
-        'recent_orders': closed_carts[:20], 
+        'total_sales_count': paid_carts.count(),
+        'recent_orders': closed_carts[:20],
         'low_stock': low_stock_products
     })
+
+
+def calculate_total_income(paid_carts):
+    """
+    Calculates total income from paid carts.
+    """
+    return sum(cart.get_total() for cart in paid_carts)

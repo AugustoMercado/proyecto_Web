@@ -1,4 +1,4 @@
-/* historial.css - MODO DARK & GUÍA DE COLOR */
+/* Order history page styling */
 
 .history-wrapper {
     padding: 40px 20px;
@@ -9,7 +9,7 @@
 }
 
 .history-title {
-    color: var(--color-primary); /* Azul (Título Sección) */
+    color: var(--color-primary);
     text-transform: uppercase;
     margin-bottom: 30px;
     font-size: 2rem;
@@ -17,25 +17,23 @@
 
 .history-list {
     width: 100%;
-    max-width: 800px; 
+    max-width: 800px;
 }
 
-/* LA TARJETA DEL PEDIDO */
+/* Order card */
 .order-card {
-    background-color: var(--bg-card); /* Fondo Oscuro */
+    background-color: var(--bg-card);
     border-radius: 15px;
     padding: 20px;
     margin-bottom: 25px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    
-    /* Borde Izquierdo Azul (Estructura) */
-    border-left: 8px solid var(--color-primary); 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-left: 8px solid var(--color-primary);
     transition: transform 0.2s;
 }
 
 .order-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
 .order-header {
@@ -48,7 +46,7 @@
 
 .order-id {
     font-weight: bold;
-    color: var(--color-primary); /* Azul */
+    color: var(--color-primary);
     font-size: 1.1rem;
 }
 
@@ -60,12 +58,12 @@
 .order-total {
     font-size: 1.2rem;
     font-weight: 800;
-    color: var(--color-accent); /* Precio -> NARANJA */
+    color: var(--color-accent);
 }
 
-/* Botón del Ticket */
+/* Ticket view button */
 .btn-ver-ticket {
-    background-color: var(--color-primary); /* Botón Info -> Azul */
+    background-color: var(--color-primary);
     color: white;
     text-decoration: none;
     padding: 8px 15px;
@@ -74,6 +72,7 @@
     font-weight: bold;
     transition: background 0.2s;
 }
+
 .btn-ver-ticket:hover {
     background-color: var(--color-primary-dark);
 }
@@ -81,11 +80,11 @@
 .divider {
     border: 0;
     height: 1px;
-    background: #333; /* Separador oscuro */
+    background: #333;
     margin: 15px 0;
 }
 
-/* LISTA DE PRODUCTOS MINIATURA */
+/* Order items list */
 .order-items {
     display: flex;
     flex-direction: column;
@@ -95,36 +94,61 @@
 .mini-item {
     display: flex;
     align-items: center;
-    background-color: #252525; /* Fondo item */
+    background-color: #252525;
     padding: 10px;
     border-radius: 10px;
 }
 
 .mini-img {
-    width: 40px; height: 40px;
+    width: 40px;
+    height: 40px;
     margin-right: 15px;
     border-radius: 5px;
     overflow: hidden;
     background: transparent;
-    display: flex; justify-content: center; align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.mini-img img { width: 100%; height: 100%; object-fit: contain; }
 
-.mini-details { flex-grow: 1; }
-.mini-name { display: block; font-weight: bold; color: var(--text-main); font-size: 0.95rem; }
-.mini-qty { font-size: 0.85rem; color: var(--text-secondary); }
+.mini-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 
-/* Botón recompra */
+.mini-details {
+    flex-grow: 1;
+}
+
+.mini-name {
+    display: block;
+    font-weight: bold;
+    color: var(--text-main);
+    font-size: 0.95rem;
+}
+
+.mini-qty {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Repurchase button */
 .btn-mini-buy {
     background-color: transparent;
     border: 1px solid var(--color-accent);
     color: var(--color-accent);
-    width: 30px; height: 30px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    display: flex; justify-content: center; align-items: center;
-    text-decoration: none; font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-weight: bold;
     transition: all 0.2s;
 }
+
 .btn-mini-buy:hover {
     background-color: var(--color-accent);
     color: white;

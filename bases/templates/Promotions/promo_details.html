@@ -2,37 +2,34 @@
 {% load static %}
 
 {% block content %}
-  <link rel="stylesheet" href="{% static 'promsdetails.css' %}">
+<link rel="stylesheet" href="{% static 'promsdetails.css' %}">
 
-    <div class="contenedor-detalle-promo">
-        
-        <h1 class="titulo-promo-detalle">{{ promo.name }}</h1>
+<div class="contenedor-detalle-promo">
+    <h1 class="titulo-promo-detalle">{{ promo.name }}</h1>
 
-        {% if promo.image %}
-            <img src="{{ promo.image.url }}" alt="{{ promo.name }}" class="img-promo-gigante">
-        {% endif %}
+    {% if promo.image %}
+    <img src="{{ promo.image.url }}" alt="{{ promo.name }}" class="img-promo-gigante">
+    {% endif %}
 
-        <div class="descripcion-lista">
-            {{ promo.details|linebreaks }}
-        </div>
-
-        <div class="precio-gigante">
-            $ {{ promo.price }}
-        </div>
-
-            <button onclick="addToCart('{{ promo.id }}')" class="btn-agregar-final">
-                🛒 Agregar
-            </button>
-
-        <a href="{% url 'main' %}" class="btn-volver">← Volver al inicio</a>
-        
-        
+    <div class="descripcion-lista">
+        {{ promo.details|linebreaks }}
     </div>
-    <script src="{% static 'JavaScript/main.js' %}"></script>
 
-    
-    <div id="toast-box" class="toast-hidden">
+    <div class="precio-gigante">
+        $ {{ promo.price }}
+    </div>
+
+    <button onclick="addToCart('{{ promo.id }}')" class="btn-agregar-final">
+        🛒 Agregar
+    </button>
+
+    <a href="{% url 'main' %}" class="btn-volver">← Volver al inicio</a>
+</div>
+
+<div id="toast-box" class="toast-hidden">
     <span id="toast-message">Producto Agregado</span>
-    </div>
+</div>
+
+<script src="{% static 'JavaScript/main.js' %}"></script>
 
 {% endblock %}

@@ -2,12 +2,10 @@
 {% load static %}
 
 {% block content %}
-
 <link rel="stylesheet" href="{% static 'ticket.css' %}">
 
 <div class="ticket-wrapper">
     <div class="ticket-card">
-        
         <div class="ticket-header">
             <h1>Almacén Bella</h1>
             <p class="subtitulo">Comprobante de Retiro</p>
@@ -29,7 +27,7 @@
                 <span class="price">${{ item.subtotal|floatformat:0 }}</span>
             </div>
             {% empty %}
-                <p style="text-align:center; color:red;">No se encontraron items</p>
+            <p style="text-align:center; color:red;">No se encontraron items</p>
             {% endfor %}
         </div>
 
@@ -44,9 +42,9 @@
             <p>ESCANEAR EN LOCAL</p>
             <div class="qr-box">
                 {% if qr_image %}
-                    <img src="data:image/png;base64,{{ qr_image }}" alt="Código QR">
+                <img src="data:image/png;base64,{{ qr_image }}" alt="Código QR">
                 {% else %}
-                    <p style="color:red; font-size:0.8rem;">Error: QR no disponible</p>
+                <p style="color:red; font-size:0.8rem;">Error: QR no disponible</p>
                 {% endif %}
             </div>
             <p class="nota-final">Presentá este código al vendedor.</p>
@@ -55,7 +53,6 @@
         <div class="ticket-footer">
             <a href="{% url 'main' %}" class="btn-volver">← Volver al Inicio</a>
         </div>
-
     </div>
 </div>
 

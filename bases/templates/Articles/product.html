@@ -2,95 +2,76 @@
 {% load static %}
 
 {% block content %}
-    <link rel="stylesheet" href="{% static 'product.css' %}">
+<link rel="stylesheet" href="{% static 'product.css' %}">
 
-    <div class="contenedor-detalle">
-        
-        <div class="detalle-imagen-box">
-            {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.name }}">
-            {% else %}
-                <div class="sin-foto">Sin Imagen</div>
-            {% endif %}
-        </div>
-
-        <h1 class="detalle-titulo">{{ product.name }}</h1>
-        
-        <p class="detalle-descripcion">
-            {{ product.details|default:"Descripción breve del producto." }}
-        </p>
-        
-        {% if product.is_kilo %}
-            <p class="detalle-precio">${{ product.price }} x 100g</p>
+<div class="contenedor-detalle">
+    <div class="detalle-imagen-box">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
         {% else %}
-            <p class="detalle-precio">${{ product.price }}</p>
-        {% endif %}
-
-        {% if product.stock > 0 %}
-            
-            <h3 style="color: white; margin-top: 20px;">AGREGAR AL CARRITO 🛒</h3>
-            
-            <p style="color: #ccc; margin-bottom: 10px;">
-                Disponibles: 
-                {% if product.is_kilo %}
-                    {{ product.stock }} g
-                {% else %}
-                    {{ product.stock|floatformat:0 }} u.
-                {% endif %}
-            </p>
-
-            <div class="acciones-compra">
-                
-                {% if product.is_kilo %}
-                    <div class="controles-cantidad">
-                        <input type="number" 
-                               id="quantity-{{ product.id }}" 
-                               value="250" 
-                               min="50" 
-                               max="{{ product.stock }}" 
-                               step="50" 
-                               class="input-cantidad" 
-                               style="width: 100px; text-align: center;">
-                        <span style="color: var(--color-primary); font-weight: bold; margin-left: 5px;">gr</span>
-                    </div>
-
-                {% else %}
-                    <div class="controles-cantidad">
-                        <button class="btn-cantidad" onclick="changeValue('{{ product.id }}', -1)">−</button>
-                        
-                        <input type="number" 
-                               id="quantity-{{ product.id }}" 
-                               value="1" 
-                               min="1" 
-                               max="{{ product.stock|floatformat:0 }}" 
-                               readonly 
-                               class="input-cantidad">
-                        
-                        <button class="btn-cantidad" onclick="changeValue('{{ product.id }}', 1)">+</button>
-                    </div>
-                {% endif %}
-
-                <button onclick="processAddToCart('{{ product.id }}', '{{ product.is_kilo }}')" class="btn-agregar-final">
-                    {% if product.is_kilo %}
-                        Pesar y Agregar ⚖️
-                    {% else %}
-                        🛒 Agregar
-                    {% endif %}
-                </button>
-            </div>
-
-        {% else %}
-            
-            <h3 style="color: red; margin-top: 20px;">🚫 PRODUCTO AGOTADO</h3>
-            <div class="acciones-compra">
-                <button disabled style="background: #555; cursor: not-allowed; color: #999;" class="btn-agregar-final">
-                    Sin Stock
-                </button>
-            </div>
-
+        <div class="sin-foto">Sin Imagen</div>
         {% endif %}
     </div>
 
-    <script src="{% static 'JavaScript/main.js' %}"></script>
+    <h1 class="detalle-titulo">{{ product.name }}</h1>
+
+    <p class="detalle-descripcion">
+        {{ product.details|default:"Descripción breve del producto." }}
+    </p>
+
+    {% if product.is_kilo %}
+    <p class="detalle-precio">${{ product.price }} x 100g</p>
+    {% else %}
+    <p class="detalle-precio">${{ product.price }}</p>
+    {% endif %}
+
+    {% if product.stock > 0 %}
+    <h3 style="color: white; margin-top: 20px;">AGREGAR AL CARRITO 🛒</h3>
+
+    <p style="color: #ccc; margin-bottom: 10px;">
+        Disponibles:
+        {% if product.is_kilo %}
+        {{ product.stock }} g
+        {% else %}
+        {{ product.stock|floatformat:0 }} u.
+        {% endif %}
+    </p>
+
+    <div class="acciones-compra">
+        {% if product.is_kilo %}
+        <div class="controles-cantidad">
+            <input type="number" id="quantity-{{ product.id }}" class="input-cantidad" value="250" min="50" max="{{ product.stock }}" step="50" style="width: 100px; text-align: center;">
+            <span style="color: var(--color-primary); font-weight: bold; margin-left: 5px;">gr</span>
+        </div>
+        {% else %}
+        <div class="controles-cantidad">
+            <button class="btn-cantidad" onclick="changeValue('{{ product.id }}', -1)">−</button>
+
+            <input type="number" id="quantity-{{ product.id }}" class="input-cantidad" value="1" min="1" max="{{ product.stock|floatformat:0 }}" readonly>
+
+            <button class="btn-cantidad" onclick="changeValue('{{ product.id }}', 1)">+</button>
+        </div>
+        {% endif %}
+
+        <button onclick="processAddToCart('{{ product.id }}', '{{ product.is_kilo }}')" class="btn-agregar-final">
+            {% if product.is_kilo %}
+            Pesar y Agregar ⚖️
+            {% else %}
+            🛒 Agregar
+            {% endif %}
+        </button>
+    </div>
+
+    {% else %}
+    <h3 style="color: red; margin-top: 20px;">🚫 PRODUCTO AGOTADO</h3>
+    <div class="acciones-compra">
+        <button disabled style="background: #555; cursor: not-allowed; color: #999;" class="btn-agregar-final">
+            Sin Stock
+        </button>
+    </div>
+    {% endif %}
+</div>
+
+<script src="{% static 'JavaScript/main.js' %}"></script>
 
 {% endblock %}

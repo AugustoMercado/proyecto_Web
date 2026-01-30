@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="{% static 'dashboard.css' %}">
     <title>Panel de Administración</title>
 </head>
+
 <body>
     <div class="dashboard-container">
-        
         <div class="header">
             <h1>📊 Panel de Administración</h1>
             <a href="{% url 'main' %}" class="btn-home">Ir a la Tienda</a>
@@ -20,7 +20,7 @@
                 <h3>Ingresos Totales</h3>
                 <p class="number">${{ total_income|floatformat:0 }}</p>
             </div>
-            
+
             <div class="card">
                 <h3>Ventas Cerradas</h3>
                 <p class="number">{{ total_sales_count }}</p>
@@ -68,7 +68,7 @@
                             <th>Fecha</th>
                             <th>Cliente</th>
                             <th>Total</th>
-                            <th>Estado</th> 
+                            <th>Estado</th>
                             <th>Acción</th>
                         </tr>
                     </thead>
@@ -79,20 +79,20 @@
                             <td>{{ cart.day_buy|date:"d/m/Y H:i" }}</td>
                             <td>{{ cart.user.first_name }} {{ cart.user.last_name }}</td>
                             <td style="font-weight: bold;">${{ cart.get_total|floatformat:0 }}</td>
-                            
+
                             <td>
                                 {% if cart.is_paid %}
-                                    <span class="status-paid">✅ COBRADO</span>
+                                <span class="status-paid">✅ COBRADO</span>
                                 {% else %}
-                                    <span class="status-pending">⏳ PENDIENTE</span>
+                                <span class="status-pending">⏳ PENDIENTE</span>
                                 {% endif %}
                             </td>
 
                             <td>
                                 <a href="{% url 'view_ticket' cart.id %}" class="link-ver">Ver Ticket</a>
-                                
+
                                 {% if not cart.is_paid %}
-                                    <a href="{% url 'mark_as_paid' cart.id %}" class="btn-pay">💰 Cobrar</a>
+                                <a href="{% url 'mark_as_paid' cart.id %}" class="btn-pay">💰 Cobrar</a>
                                 {% endif %}
                             </td>
                         </tr>
@@ -105,7 +105,6 @@
                 </table>
             </div>
         </div>
-
     </div>
 </body>
 </html>

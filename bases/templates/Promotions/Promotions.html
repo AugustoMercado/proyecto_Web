@@ -2,42 +2,35 @@
 {% load static %}
 
 {% block content %}
-
 <link rel="stylesheet" href="{% static 'promotions.css' %}">
 
-    <h1 class="titulo-pagina-promos">Nuestras Promos</h1>
+<h1 class="titulo-pagina-promos">Nuestras Promos</h1>
 
-    <div class="contenedor-catalogo-promos">
-        
-        {% for promo in promos %}
-        
-            <a href="{% url 'promo_details' promo.id %}" class="link-sin-estilo">
-                
-                <div class="tarjeta-promo">
-                    
-                    <div class="promo-img-box">
-                        {% if promo.image %}
-                            <img src="{{ promo.image.url }}" alt="{{ promo.name }}">
-                        {% else %}
-                            <div class="sin-foto">📦</div>
-                        {% endif %}
-                    </div>
+<div class="contenedor-catalogo-promos">
+    {% for promo in promos %}
+    <a href="{% url 'promo_details' promo.id %}" class="link-sin-estilo">
+        <div class="tarjeta-promo">
+            <div class="promo-img-box">
+                {% if promo.image %}
+                <img src="{{ promo.image.url }}" alt="{{ promo.name }}">
+                {% else %}
+                <div class="sin-foto">📦</div>
+                {% endif %}
+            </div>
 
-                    <div class="promo-contenido">
-                        {{ promo.details |linebreaksbr }}
-                    </div>
+            <div class="promo-contenido">
+                {{ promo.details|linebreaksbr }}
+            </div>
 
-                    <div class="promo-precio">
-                        $ {{ promo.price }}
-                    </div>
+            <div class="promo-precio">
+                $ {{ promo.price }}
+            </div>
+        </div>
+    </a>
 
-                </div>
-            </a>
-
-        {% empty %}
-            <p style="color: white; text-align: center; width: 100%;">No hay promociones activas por el momento.</p>
-        {% endfor %}
-
-    </div>
+    {% empty %}
+    <p style="color: white; text-align: center; width: 100%;">No hay promociones activas por el momento.</p>
+    {% endfor %}
+</div>
 
 {% endblock %}

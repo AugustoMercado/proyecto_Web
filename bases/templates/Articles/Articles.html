@@ -2,31 +2,26 @@
 {% load static %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'articles.css' %}">
 
-    <link rel="stylesheet" href="{% static 'articles.css' %}">
+<h1 style="text-align: center; color: #E67E22; margin-top: 30px; font-family: sans-serif;">
+    Nuestras Secciones
+</h1>
 
-    <h1 style="text-align: center; color: #E67E22; margin-top: 30px; font-family: sans-serif;">
-        Nuestras Secciones
-    </h1>
-    
-    <div class="contenedor-categorias">
-        
-        {% for cat in categories %}
-        <a href="{% url 'products_by_category' cat.id %}" class="tarjeta-categoria">
-            
-            {% with first_product=cat.products.first %}
-                {% if first_product and first_product.image %}
-                    <img src="{{ first_product.image.url }}" class="img-referencia" alt="{{ cat.name }}">
-                {% else %}
-                    <div style="font-size: 40px; margin-bottom: 10px;">📦</div>
-                {% endif %}
-            {% endwith %}
+<div class="contenedor-categorias">
+    {% for cat in categories %}
+    <a href="{% url 'products_by_category' cat.id %}" class="tarjeta-categoria">
+        {% with first_product=cat.products.first %}
+        {% if first_product and first_product.image %}
+        <img src="{{ first_product.image.url }}" class="img-referencia" alt="{{ cat.name }}">
+        {% else %}
+        <div style="font-size: 40px; margin-bottom: 10px;">📦</div>
+        {% endif %}
+        {% endwith %}
 
-            <h2 class="texto-categoria">{{ cat.name }}</h2>
-            
-        </a>
-        {% endfor %}
-        
-    </div>
+        <h2 class="texto-categoria">{{ cat.name }}</h2>
+    </a>
+    {% endfor %}
+</div>
 
 {% endblock %}

@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Q
 from .models import Products, Category, Promotions
-from django.db.models import Q 
+
 
 def display_main(request):
     """
-    Renders the main homepage with 10 random products and active promotions.
+    Renders the main homepage with random products and active promotions.
     """
     random_products = Products.objects.filter(category__is_active=True).order_by('?')[:10]
     promos = Products.objects.filter(is_promotion=True)
@@ -13,6 +14,7 @@ def display_main(request):
         'products': random_products,
         'promos': promos
     })
+
 
 def display_categories(request):
     """
@@ -23,11 +25,13 @@ def display_categories(request):
         'categories': categories
     })
 
+
 def display_information(request):
     """
     Renders the static information page.
     """
     return render(request, 'Information/Information.html')
+
 
 def display_promotions(request):
     """
@@ -36,26 +40,27 @@ def display_promotions(request):
     promos = Products.objects.filter(is_promotion=True)
     return render(request, 'Promotions/Promotions.html', {'promos': promos})
 
+
 def promo_detail(request, promo_id):
     """
     Renders the details of a specific promotional product.
     """
-    selected_promo = get_object_or_404(Products, pk=promo_id)
-    return render(request, 'Promotions/promo_details.html', {'promo': selected_promo})
+    promo = get_object_or_404(Products, pk=promo_id)
+    return render(request, 'Promotions/promo_details.html', {'promo': promo})
+
 
 def products_by_category(request, category_id):
     """
-    Filters and displays products belonging to a specific category, excluding promotions.
+    Displays products belonging to a specific category, excluding promotions.
     """
-    selected_category = get_object_or_404(Category, id=category_id)
-    filtered_products = Products.objects.filter(category=selected_category, is_promotion=False)
+    category = get_object_or_404(Category, id=category_id)
+    products = Products.objects.filter(category=category, is_promotion=False)
 
-    context = {
-        'category': selected_category,
-        'products': filtered_products 
-    }
-    
-    return render(request, 'Articles/allproducts.html', context)
+    return render(request, 'Articles/allproducts.html', {
+        'category': category,
+        'products': products
+    })
+
 
 def product_details(request, product_id):
     """
@@ -64,21 +69,29 @@ def product_details(request, product_id):
     product = get_object_or_404(Products, pk=product_id)
     return render(request, 'Articles/product.html', {'product': product})
 
+
 def search_products(request):
     """
-    Searches for products by name or details based on a query string.
+    Searches for products by name or details based on query parameter.
     """
     query = request.GET.get('q', '').strip()
-    
-    if query:
-        results = Products.objects.filter(
-            Q(name__icontains=query) | 
-            Q(details__icontains=query)
-        )
-    else:
-        results = []
+    results = search_products_by_query(query)
 
     return render(request, 'Articles/allproducts.html', {
-        'products': results, 
+        'products': results,
         'query': query
     })
+
+
+def search_products_by_query(query):
+    """
+    Filters products based on name or details match.
+    Returns empty list if query is empty.
+    """
+    if not query:
+        return []
+    
+    return Products.objects.filter(
+        Q(name__icontains=query) |
+        Q(details__icontains=query)
+    )
